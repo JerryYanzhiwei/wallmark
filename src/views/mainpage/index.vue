@@ -9,7 +9,7 @@
       </el-aside>
       <el-main
         :style="{
-          background: $route.path === '/main/userInfo' ? '' : `url(${bg}) repeat center`,
+          background: $route.path === '/main/userInfo' ? '' : '',
           backgroundSize: 'cover',
           backgroundAttachment: 'fixed'
         }">

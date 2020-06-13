@@ -1,6 +1,6 @@
 <template>
   <div class="team_info_container">
-    <PublicTitle title="队伍信息" color="#fff" />
+    <PublicTitle title="队伍信息" />
     <div v-if="teamInfo" class="leader_contain">
       <div class="leader_top">
         <div class="item">
@@ -99,7 +99,7 @@
         </div>
       </div>
     </div>
-    <PublicTitle title="队伍成员" color="#fff" />
+    <PublicTitle title="队伍成员" />
     <div v-if="teamInfo" class="member_contain">
       <!-- 队伍成员 -->
       <div v-for="(item, index) in teamInfo.teamMembers" :key="index" class="member_item">
@@ -163,7 +163,7 @@ export default {
     }
   },
   created () {
-    // this.getTeamInfo()
+    this.getTeamInfo()
   },
   methods: {
     ...mapActions(['GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO']),
@@ -248,6 +248,7 @@ export default {
       border-radius: 5px;
       border: 2px solid $border_color;
       background-color: $card_bg_color;
+      box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
       .leader_top {
         display: flex;
         flex-wrap: wrap;
@@ -270,11 +271,11 @@ export default {
             width: 80px;
             margin-right: 5px;
 
-            color: #fff;
+            color: $card_font_color;
             text-align: right;
           }
           .item_detail {
-            color: #fff;
+            color: $card_font_color;
           }
         }
       }
@@ -292,14 +293,14 @@ export default {
             width: 80px;
             margin-right: 5px;
 
-            color: #fff;
+            color: $card_font_color;
             text-align: right;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
           }
           .item_detail {
-            color: #fff;
+            color: $card_font_color;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -319,6 +320,7 @@ export default {
 
         background-color: #fff;
         border-radius: 10px;
+        box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
         transition: all .2s linear;
         &:nth-child(3n + 1) {
           margin-left: 0;

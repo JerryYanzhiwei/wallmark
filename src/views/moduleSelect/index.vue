@@ -1,9 +1,5 @@
 <template>
-  <div class="module_select_container"
-    :style="{
-      background: `url(${bg}) repeat center`,
-      backgroundSize: 'cover'
-    }">
+  <div class="module_select_container">
     <el-header class="main_header">
       <MainHeader></MainHeader>
     </el-header>
@@ -279,9 +275,10 @@ export default {
         width: 400px;
         height: 300px;
 
-        background-color: $card_bg_color;
-        color: #fff;
+        background-color: #fff;
+        color: #333;
         transition: all .2s linear;
+        box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
         border-radius: 8px;
         cursor: pointer;
         font-size: 18px;

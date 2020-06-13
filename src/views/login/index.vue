@@ -437,6 +437,7 @@ export default {
       padding: 20px;
 
       border-radius: 8px;
+      box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
       .login_top {
         margin-bottom: 30px;
         text-align: center;
