@@ -1,7 +1,7 @@
 <template>
   <!-- 作品提交 -->
   <div class="works_submit_container">
-    <PublicTitle title="作品提交" color="#fff" />
+    <PublicTitle title="作品提交"/>
     <div class="submit_container">
       <div class="submit_item">
         <div class="submit_left flex_center">作品说明书</div>
@@ -231,7 +231,7 @@ export default {
     box-shadow: 1px 2px 5px 1px #fff;
     .submit_item {
       display: flex;
-      border-bottom: 1px solid #fff;
+      border-bottom: 1px solid #ddd;
       &:last-child {
         border-bottom: unset;
       }
@@ -241,10 +241,10 @@ export default {
         align-items: center;
         width: 20%;
         padding: 0 20px;
-        color: #fff;
+        color: $card_font_color;
       }
       .submit_left {
-        border-right: 1px solid #fff;
+        border-right: 1px solid #ddd;
       }
       .submit_center {
         display: flex;
@@ -258,7 +258,7 @@ export default {
         .center_left {
           flex-grow: 1;
           padding: 20px;
-          color: #fff;
+          color: $card_font_color;;
         }
         .center_right {
           flex-shrink: 0;
@@ -277,7 +277,7 @@ export default {
               display: inline-block;
               text-overflow: ellipsis;
               white-space: nowrap;
-              color: #fff;
+              color: $card_font_color;;
             }
           }
           .del_btn {
@@ -311,7 +311,7 @@ export default {
 
     font-size: 16px;
     .progress {
-      color: #fff;
+      color: $card_font_color;;
     }
     .process {
       margin-left: 10%;

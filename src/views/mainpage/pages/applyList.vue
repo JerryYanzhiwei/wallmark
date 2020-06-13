@@ -1,6 +1,6 @@
 <template>
   <div class="apply_list_container">
-    <PublicTitle title="申请列表" color="#fff" />
+    <PublicTitle title="申请列表" />
     <div class="apply_contain">
       <div v-if="!applyList.length" class="no_data">
         暂无数据
@@ -123,7 +123,7 @@ export default {
         background-color: $card_bg_color;
         border-radius: 10px;
         transition: all .2s linear;
-        border: 2px solid $border_color;
+        box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
         &:nth-child(3n + 1) {
           margin-left: 0;
         }
@@ -139,10 +139,10 @@ export default {
           font-size: 16px;
           font-weight: bold;
           i {
-            color: #fff;
+            color: $card_font_color;
           }
           span {
-            color: $border_color;
+            color: $card_font_color;
           }
         }
         .item_contain {
@@ -151,7 +151,7 @@ export default {
           .item_detail {
             padding-bottom: 10px;
             font-size: 14px;
-            color: #fff;
+            color: $card_font_color;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -172,10 +172,10 @@ export default {
           span {
             width: 50%;
             text-align: center;
-            // background: #dc1e32;
+            background: #dc1e32;
             cursor: pointer;
             &:hover {
-              background: $border_color;
+              background: #ea4d5e;
             }
           }
         }

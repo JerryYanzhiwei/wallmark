@@ -1,6 +1,6 @@
 <template>
   <div v-if="joinedData.length || applyList.length" class="team_cener_container">
-    <PublicTitle title="已加入" color="#fff" />
+    <PublicTitle title="已加入" color="#333" />
     <div class="team_contain added_contain">
       <div v-if="!joinedData.length" class="no_data">
         暂无数据
@@ -61,7 +61,7 @@
       layout="prev, pager, next"
       :total="joinPage.recordNumber">
     </el-pagination>
-    <PublicTitle title="申请列表" color="#fff" />
+    <PublicTitle title="申请列表" color="#333" />
     <div class="team_contain">
       <div v-if="!applyList.length" class="no_data">
         暂无数据
@@ -275,6 +275,7 @@ export default {
 
         background-color: $card_bg_color;
         border: 2px solid $border_color;
+        box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
         cursor: pointer;
         &.apply_contain {
@@ -285,7 +286,7 @@ export default {
             position: absolute;
             top: 10px;
             left: 10px;
-            color: #fff;
+            color: $card_font_color;
           }
         }
         transition: all .2s linear;
@@ -312,7 +313,7 @@ export default {
             color: #fff;
           }
           .name {
-            color: $border_color;
+            color: $card_font_color;
           }
         }
         .item_contain {
@@ -323,7 +324,7 @@ export default {
             margin-bottom: 15px;
 
             font-size: 14px;
-            color: #fff;
+            color: $card_font_color;
             .title {
               width: 30%;
               padding-right: 5px;
@@ -340,6 +341,7 @@ export default {
             }
             .detail {
               width: 78%;
+              color: $card_font_color;
 
               text-overflow: -o-ellipsis-lastline;
               overflow: hidden;
