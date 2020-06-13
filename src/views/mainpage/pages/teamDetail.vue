@@ -1,6 +1,6 @@
 <template>
   <div v-if="teamInfo" class="team_info_container">
-    <PublicTitle color="#fff" title="队伍信息" />
+    <PublicTitle color="#333" title="队伍信息" />
     <div class="leader_contain">
       <div class="leader_top">
         <div class="item">
@@ -66,8 +66,11 @@
           <el-button size="mini">完成组队</el-button>
         </div>
       </div> -->
+      <div class="sign_out">
+        <el-button size="mini">退出队伍</el-button>
+      </div>
     </div>
-    <PublicTitle color="#fff" title="队伍成员" />
+    <PublicTitle color="#333" title="队伍成员" />
     <div class="member_contain">
       <!-- 队伍成员 -->
       <div v-for="(item, index) in teamInfo.teamMembers" :key="index" class="member_item">
@@ -99,7 +102,7 @@
         </div>
       </div>
     </div>
-    <PublicTitle color="#fff" title="作品列表" />
+    <PublicTitle color="#333" title="作品列表" />
     <div class="work_list">
       <div v-for="(item, index) in teamInfo.attachments" :key="index">
         {{
@@ -160,7 +163,7 @@ export default {
       box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
       border: 2px solid $border_color;
       background-color: $card_bg_color;
-      color: #fff;
+      color: #333;
       .leader_top {
         display: flex;
         flex-wrap: wrap;
@@ -183,11 +186,11 @@ export default {
             width: 120px;
             margin-right: 5px;
 
-            color: #fff;
+            color: #333;
             text-align: right;
           }
           .item_detail {
-            color: #fff;
+            color: #333;
           }
         }
       }
@@ -213,6 +216,13 @@ export default {
           }
         }
       }
+      .sign_out {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        margin-top: 20px;
+      }
     }
     .member_contain {
       display: flex;
@@ -227,9 +237,10 @@ export default {
 
         background-color: $card_bg_color;
         border: 2px solid $border_color;
+        box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
         transition: all .2s linear;
-        color: #fff;
+        color: #333;
         &:nth-child(3n + 1) {
           margin-left: 0;
         }
@@ -252,7 +263,7 @@ export default {
             margin-bottom: 10px;
 
             font-size: 14px;
-            color: #fff;
+            color: #333;
           }
         }
         .btn_contain {
@@ -286,4 +297,17 @@ export default {
       }
     }
   }
+</style>
+
+<style lang="scss">
+.team_info_container {
+  .leader_contain {
+    .sign_out {
+      .el-button {
+        font-size: 16px;
+        color: #333;
+      }
+    }
+  }
+}
 </style>
