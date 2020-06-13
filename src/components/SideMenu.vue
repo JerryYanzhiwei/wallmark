@@ -38,17 +38,17 @@ export default {
         {
           path: '/main/teamInfo',
           title: '队伍信息',
-          flag: true // this.userInfo.captainFlag
+          flag: this.userInfo.captainFlag
         },
         {
           path: '/main/applyList',
           title: '申请列表',
-          flag: true // this.userInfo.captainFlag
+          flag: this.userInfo.captainFlag
         },
         {
           path: '/main/worksSubmit',
           title: '作品提交',
-          flag: true //  this.userInfo.captainFlag
+          flag: this.userInfo.captainFlag
         }
       ]
     },

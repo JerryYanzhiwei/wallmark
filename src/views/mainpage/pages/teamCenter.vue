@@ -25,11 +25,11 @@
           </div>
           <div class="item_detail">
             <div class="title">赛区: </div>
-            <!-- <div class="detail">{{getZone(item.matchZone)}}</div> -->
+            <div class="detail">{{getZone(item.matchZone)}}</div>
           </div>
           <div class="item_detail">
             <div class="title">省份: </div>
-            <!-- <div class="detail">{{getProvince(item.matchZone, item.province)}}</div> -->
+            <div class="detail">{{getProvince(item.matchZone, item.province)}}</div>
           </div>
           <div class="item_detail">
             <div class="title">方向: </div>
@@ -87,11 +87,11 @@
           </div>
           <div class="item_detail">
             <div class="title">赛区: </div>
-            <!-- <div class="detail">{{getZone(item.matchZone)}}</div> -->
+            <div class="detail">{{getZone(item.matchZone)}}</div>
           </div>
           <div class="item_detail">
             <div class="title">省份: </div>
-            <!-- <div class="detail">{{getProvince(item.matchZone, item.province)}}</div> -->
+            <div class="detail">{{getProvince(item.matchZone, item.province)}}</div>
           </div>
           <div class="item_detail">
             <div class="title">方向: </div>
@@ -191,8 +191,8 @@ export default {
     }
   },
   created () {
-    // this.getApplyList(this.joinedForm, 1)
-    // this.getApplyList(this.applyedForm, 2)
+    this.getApplyList(this.joinedForm, 1)
+    this.getApplyList(this.applyedForm, 2)
   },
   methods: {
     ...mapActions(['GET_TEMP_CENTER', 'POST_APPLY_TEAM']),
