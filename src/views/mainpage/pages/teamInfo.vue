@@ -4,7 +4,7 @@
     <div v-if="teamInfo" class="leader_contain">
       <div class="leader_top">
         <div class="item">
-          <span class="item_name">1编号: </span>
+          <span class="item_name">编号: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.teamNo" placement="top-start">
             <span class="item_detail">{{teamInfo.teamNo}}</span>
           </el-tooltip>
