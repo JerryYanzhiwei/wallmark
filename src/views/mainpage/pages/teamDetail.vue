@@ -156,7 +156,8 @@ export default {
       padding: 20px 0;
 
       background: white;
-      box-shadow: 1px 2px 5px 1px $border_color;
+      // box-shadow: 1px 2px 5px 1px $border_color;
+      box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
       border: 2px solid $border_color;
       background-color: $card_bg_color;
       color: #fff;
