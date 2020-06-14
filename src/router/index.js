@@ -12,6 +12,7 @@ const worksStatus = () => import(/* webpackChunkName: "backend" */ '../views/mai
 const applyList = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/applyList.vue')
 const teamCenter = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/teamCenter.vue')
 const teamDetail = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/teamDetail.vue')
+const createTeam = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/createTeam.vue')
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push (location) {
@@ -67,6 +68,10 @@ const routes = [
       {
         path: 'teamDetail',
         component: teamDetail
+      },
+      {
+        path: 'createTeam',
+        component: createTeam
       }
     ]
   },

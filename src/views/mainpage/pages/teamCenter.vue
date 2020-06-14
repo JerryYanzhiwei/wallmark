@@ -1,13 +1,14 @@
 <template>
-  <div v-if="joinedData.length || applyList.length" class="team_cener_container">
+  <div class="team_cener_container">
     <PublicTitle title="已加入" color="#333" />
     <div class="team_contain added_contain">
-      <div v-if="!joinedData.length" class="no_data">
-        暂无数据
+      <div v-if="!teamInfo" class="no_data">
+        <p>暂未加入任何队伍</p>
+        <p @click="toCreate" class="create_team">快来创建队伍吧!</p>
       </div>
       <div
+        v-else
         @click="toDetail(item)"
-        v-for="(item, index) in joinedData" :key="index"
         class="team_item">
         <div class="team_name">
           <i class="iconfont icon-tuandui"></i>
@@ -23,126 +24,9 @@
             <div class="title">电话: </div>
             <div class="detail">{{item.captainPhone}}</div>
           </div>
-          <div class="item_detail">
-            <div class="title">赛区: </div>
-            <div class="detail">{{getZone(item.matchZone)}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">省份: </div>
-            <div class="detail">{{getProvince(item.matchZone, item.province)}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">方向: </div>
-            <div class="detail">{{item.opusDirection}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">课题: </div>
-            <div class="detail">{{item.subject}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">招募需求: </div>
-            <div class="detail">{{item.recruitmentDemand}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">团队介绍: </div>
-            <el-tooltip class="item" effect="dark" :content="item.teamIntroduction" placement="top-start">
-              <div class="detail">
-                {{item.teamIntroduction}}
-              </div>
-            </el-tooltip>
-          </div>
         </div>
       </div>
     </div>
-    <el-pagination
-      small
-      :page-size="joinPage.pageSize"
-      @current-change="joinPageChange"
-      layout="prev, pager, next"
-      :total="joinPage.recordNumber">
-    </el-pagination>
-    <!-- <PublicTitle title="申请列表" color="#333" />
-    <div class="team_contain">
-      <div v-if="!applyList.length" class="no_data">
-        暂无数据
-      </div>
-      <div
-        v-for="(item, index) in applyList" :key="index"
-        class="team_item apply_contain">
-        <i v-if="item.applyState === 2" class="apply_state">已拒绝</i>
-        <i v-if="item.applyState === 0" class="apply_state">申请中</i>
-        <div class="team_name">
-          <i class="iconfont icon-tuandui"></i>
-          <b class="name">{{item.teamName}}</b>
-          <span>{{item.teamNo}}</span>
-        </div>
-        <div class="item_contain">
-          <div class="item_detail">
-            <div class="title">队长: </div>
-            <div class="detail">{{item.captain}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">电话: </div>
-            <div class="detail">{{item.captainPhone}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">赛区: </div>
-            <div class="detail">{{getZone(item.matchZone)}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">省份: </div>
-            <div class="detail">{{getProvince(item.matchZone, item.province)}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">方向: </div>
-            <div class="detail">{{item.opusDirection}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">课题: </div>
-            <div class="detail">{{item.subject}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">招募需求: </div>
-            <div class="detail">{{item.recruitmentDemand}}</div>
-          </div>
-          <div class="item_detail">
-            <div class="title">团队介绍: </div>
-            <el-tooltip class="item" effect="dark" :content="item.teamIntroduction" placement="top-start">
-              <div class="detail">
-                {{item.teamIntroduction}}
-              </div>
-            </el-tooltip>
-          </div>
-          <div v-if="item.applyState === 2" class="btn_contain">
-            <el-button @click="reJoin(item)" type="danger" size="mini">重新申请</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <el-pagination
-      small
-      :page-size="applyPage.pageSize"
-      @current-change="applyPageChange"
-      layout="prev, pager, next"
-      :total="applyPage.recordNumber">
-    </el-pagination>
-    <el-dialog
-      width="30%"
-      :visible="dialogVisible"
-      :before-close="handleClose"
-      title="留言板"
-      >
-      <el-input
-        rows="3"
-        resize="none"
-        type="textarea"
-        v-model="joinData.leaveMesseges"
-        ></el-input>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="danger" @click="submitApply">确 定</el-button>
-      </span>
-    </el-dialog> -->
   </div>
 </template>
 
@@ -156,85 +40,27 @@ export default {
   },
   data () {
     return {
-      joinedData: [
-        {
-          matchZone: '1',
-          captain: '',
-          captainPhone: '',
-          teamName: '',
-          teamNo: '',
-          province: '',
-          opusDirection: '',
-          subject: '',
-          recruitmentDemand: '',
-          teamIntroduction: ''
-        }
-      ],
-      applyList: [],
-      joinPage: {},
-      applyPage: {},
-      dialogVisible: false,
-      joinedForm: {
-        pageNo: 1,
-        pageSize: 12,
-        teamApplys: [1]
-      },
-      applyedForm: {
-        pageNo: 1,
-        pageSize: 12,
-        teamApplys: [0, 2]
-      },
-      joinData: {
-        leaveMesseges: '',
-        teamNo: ''
-      }
+      teamInfo: null,
+      dialogVisible: true,
+      createTeam: {}
     }
   },
   created () {
-    this.getApplyList(this.joinedForm, 1)
-    this.getApplyList(this.applyedForm, 2)
+    this.getApplyList()
   },
   methods: {
-    ...mapActions(['GET_TEMP_CENTER', 'POST_APPLY_TEAM']),
-    // 弹框关闭
-    handleClose (done) {
-      this.dialogVisible = false
-    },
-    async submitApply () {
-      const params = this.joinedData
-      const res = await this.POST_APPLY_TEAM(params)
-      if (res.result === '0' && res.data) {
-        this.$message.success('申请成功')
-        this.getApplyList(this.joinedForm, 1)
-        this.getApplyList(this.applyedForm, 2)
-        this.dialogVisible = false
-      }
-    },
-    reJoin (data) {
-      this.joinedData.teamNo = data.teamNo
-      this.dialogVisible = true
-    },
-    joinPageChange (data) {
-      this.joinedForm.pageNo = data
-      this.getApplyList(this.joinedForm, 1)
-    },
-    applyPageChange (data) {
-      this.applyedForm.pageNo = data
-      this.getApplyList(this.applyedForm, 2)
+    ...mapActions(['GET_TEMP_CENTER']),
+    // 去创建队伍
+    toCreate () {
+      this.$router.push('/main/createTeam')
     },
     // 查询申请列表 type 1: 已加入 2: 拒绝/申请中
-    async getApplyList (params, type) {
-      const res = await this.GET_TEMP_CENTER(params)
+    async getApplyList () {
+      const res = await this.GET_TEMP_CENTER()
       console.log(res)
-      if (type === 1) {
-        this.joinedData = res.data.records
-        this.joinPage = res.data
+      if (res.result === '0' && res.data) {
+        this.teamInfo = res.data
       }
-      if (type === 2) {
-        this.applyList = res.data.records
-        this.applyPage = res.data
-      }
-      console.log(res)
     },
     // 跳转队伍详情
     toDetail (data) {
@@ -255,6 +81,13 @@ export default {
       width: 100%;
       text-align: center;
       padding: 20px 0;
+      p {
+        margin: 20px 0;
+      }
+      .create_team {
+        color: #1989fa;
+        cursor: pointer;
+      }
     }
     .iconfont {
       font-size: 18px;

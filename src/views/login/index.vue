@@ -42,29 +42,13 @@
           >
           <!-- 姓名 -->
           <el-form-item
-            prop="name"
+            prop="username"
             label="姓名">
             <el-input
-              v-model="registryForm.name"
+              v-model="registryForm.username"
               size="mini"
               >
             </el-input>
-          </el-form-item>
-          <!-- 性别 -->
-          <el-form-item
-            prop="gender"
-            label="性别">
-            <el-select
-              size="mini"
-              v-model="registryForm.gender"
-              placeholder="">
-              <el-option
-                v-for="item in sexArr"
-                :key="item.code"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
           </el-form-item>
           <!-- 手机号 -->
           <el-form-item
@@ -120,12 +104,48 @@
               >
             </el-input>
           </el-form-item>
+          <!-- 省份 -->
           <el-form-item
-            label="学生证"
-            >
-            <span v-if="fileName">{{fileName}} <i @click="clickUploadBtn(2)" class="reload">重新上传</i></span>
-            <el-button v-else size="mini" @click="clickUploadBtn(2)">上传</el-button>
-            <input type="file" v-show="false" ref="file2" @change="fileChange">
+            prop="province"
+            label="省份">
+            <el-select
+              @change="changeProvince"
+              size="mini"
+              v-model="registryForm.province"
+              placeholder="请选择">
+              <el-option
+                v-for="item in ProvinceData"
+                :key="item.value"
+                :label="item.labelZh"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 城市 -->
+          <el-form-item
+            prop="city"
+            label="城市">
+            <el-select size="mini" v-model="registryForm.city" placeholder="请选择">
+              <el-option
+                v-for="item in cityData"
+                :key="item.value"
+                :label="item.labelZh"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 学历 -->
+          <el-form-item
+            prop="degree"
+            label="学历">
+            <el-select size="mini" v-model="registryForm.degree" placeholder="请选择">
+              <el-option
+                v-for="item in DegreeData"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
           </el-form-item>
           <!-- 专业 -->
           <el-form-item
@@ -137,33 +157,25 @@
               >
             </el-input>
           </el-form-item>
-          <!-- 年级 -->
-          <el-form-item
-            prop="grade"
-            label="年级">
-            <el-input
-              v-model="registryForm.grade"
-              size="mini"
-              >
-            </el-input>
-          </el-form-item>
-          <!-- 备注 -->
-          <el-form-item
-            label="备注">
-            <el-input
-              v-model="registryForm.described"
-              size="mini"
-              >
-            </el-input>
-          </el-form-item>
         </el-form>
+        <div class="intention_contain">
+          <p>是否对沃尔玛秋招/实习招募感兴趣？</p>
+          <el-select size="mini" v-model="registryForm.intention" placeholder="请选择">
+            <el-option
+              v-for="item in [{label: '是', value: '0'}, {label: '否', value: '1'}]"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
       </div>
       <div class="btn_contain">
         <el-button @click="submitRegistry" size="mini">注册</el-button>
       </div>
     </div>
     <!-- 抽奖 -->
-    <div v-if="drawVisibel" class="prize_contain">
+    <!-- <div v-if="drawVisibel" class="prize_contain">
       <p class="luck_draw_txt">点击抽奖</p>
       <div class="prize_items">
         <div @click="touchPrize" class="prize_detail" v-for="(item, index) in [1, 2, 3]" :key="index">
@@ -172,19 +184,24 @@
           <img class="hidden" :src="prizeCover" alt="">
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import bg from '@/assets/bg.png'
+import ProvinceData from '@/config/province.js'
+import DegreeData from '@/config/degree.js'
 export default {
   data () {
     return {
       logo: require('../../assets/images/title.jpg'),
       prizeCover: require('../../assets/images/cover1.png'),
       prizeBack: require('../../assets/images/cover2.png'),
+      ProvinceData,
+      DegreeData,
+      cityData: '',
       bg,
       showCount: false,
       count: 0,
@@ -209,16 +226,17 @@ export default {
         verificationCode: ''
       },
       registryForm: {
-        name: '',
+        city: '',
+        degree: '',
+        intention: '',
+        username: '',
         phone: '',
-        gender: '',
         verificationCode: '',
         password: '',
         email: '',
         school: '',
         profession: '',
-        grade: '',
-        described: ''
+        province: ''
       },
       postForm: null,
       sexArr: [
@@ -236,13 +254,10 @@ export default {
   computed: {
     rules () {
       return {
-        name: [
+        username: [
           { required: true, message: '', trigger: 'blur' }
         ],
         phone: [
-          { required: true, message: '', trigger: 'blur' }
-        ],
-        gender: [
           { required: true, message: '', trigger: 'blur' }
         ],
         verificationCode: [
@@ -260,7 +275,16 @@ export default {
         profession: [
           { required: true, message: '', trigger: 'blur' }
         ],
-        grade: [
+        degree: [
+          { required: true, message: '', trigger: 'blur' }
+        ],
+        intention: [
+          { required: true, message: '', trigger: 'blur' }
+        ],
+        province: [
+          { required: true, message: '', trigger: 'blur' }
+        ],
+        city: [
           { required: true, message: '', trigger: 'blur' }
         ]
       }
@@ -271,26 +295,11 @@ export default {
   },
   methods: {
     ...mapActions(['login', 'POST_GET_CODE', 'POST_REGISTRY', 'LOGIN_CODE', 'CODE_LOGIN']),
-    clickUploadBtn (type) {
-      console.log('上传类型', type)
-      const ref = `file${type}`
-      const dom = this.$refs[ref]
-      dom && dom.click()
-    },
-    async fileChange (e) {
-      const file = e.target.files[0]
-      console.log('file:', file)
-      const arr = file.name.split('.')
-      const type = arr[arr.length - 1]
-      const acceptTypes = ['png', 'jpg', 'jpeg']
-      if (type && acceptTypes.indexOf(type) > -1) {
-        this.fileName = file.name
-        this.studentCard = file
-        const dom = this.$refs.file2
-        dom.value = ''
-      } else {
-        this.$message.error('只允许上传jpg,png,jpeg类型文件')
-      }
+    // 选择省份 根据省份过滤城市
+    changeProvince (data) {
+      this.registryForm.city = ''
+      const arr = ProvinceData.filter((item) => item.value === data)
+      this.cityData = arr[0].children
     },
     // 获取登录验证码
     async sendLoginCode () {
@@ -332,7 +341,7 @@ export default {
       const res = await this.login(this.loginForm)
       if (res.result === '0') {
         sessionStorage.setItem('userInfo', JSON.stringify(res.data))
-        this.$router.push('/moduleSelect')
+        this.$router.push('/main/userInfo')
       }
       console.log('密码登录', res)
     },
@@ -340,7 +349,7 @@ export default {
       const res = await this.CODE_LOGIN(this.loginForm)
       if (res.result === '0') {
         sessionStorage.setItem('userInfo', JSON.stringify(res.data))
-        this.$router.push('/moduleSelect')
+        this.$router.push('/main/userInfo')
       }
       console.log('验证码登录', res)
     },
@@ -375,7 +384,6 @@ export default {
     },
     // 注册账号
     submitRegistry () {
-      const width = document.body.clientWidth
       this.$refs.registryForm.validate(async (valid) => {
         if (valid) {
           if (!this.validatePhone(this.registryForm.phone)) {
@@ -386,28 +394,17 @@ export default {
             this.$message.error('请输入正确的邮箱')
             return
           }
-          if (!this.studentCard) {
-            this.$message.error('请上传学生证')
+          if (this.registryForm.intention === '') {
+            this.$message.error('请选择是否有意向加入沃尔玛')
             return
           }
           this.postForm = new FormData()
-          this.postForm.append('studentCardFile', this.studentCard)
           for (var key in this.registryForm) {
             this.postForm.append(key, this.registryForm[key])
           }
           const res = await this.POST_REGISTRY(this.postForm)
           if (res.result === '0' && res.data) {
-            this.$message.success('注册成功')
-            if (width < 500) {
-              this.$alert('注册成功, 请在电脑中继续操作', 'TIP', {
-                confirmButtonText: '确定',
-                callback: action => {
-                  this.drawVisibel = true
-                }
-              })
-            } else {
-              this.drawVisibel = true
-            }
+            this.isLogin = true
           }
           console.log('通过', res)
         } else {
@@ -492,6 +489,7 @@ export default {
 
       background-color: #fff;
       border-radius: 8px;
+      box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
       .registry_txt {
         position: relative;
 
@@ -572,6 +570,13 @@ export default {
     .btn_contain {
       margin-top: 15px;
       text-align: center;
+    }
+    .intention_contain {
+      color: #606266;
+      padding-left: 40px;
+      p {
+        margin-bottom: 10px;
+      }
     }
   }
   @media screen and (max-width: 500px) {

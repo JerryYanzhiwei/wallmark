@@ -5,7 +5,7 @@
       <div class="user_top">
         <div>
           <span>姓名: </span>
-          <el-input v-model="userForm.name" size="mini"></el-input>
+          <el-input v-model="userForm.username" size="mini"></el-input>
         </div>
         <div>
           <span>手机: </span>
@@ -88,16 +88,15 @@ export default {
   data () {
     return {
       userForm: {
-        accountId: '',
-        name: '',
-        phone: '',
+        city: '',
         email: '',
-        school: '',
+        intention: '',
+        phone: '',
         profession: '',
-        grade: '',
-        described: ''
+        province: '',
+        school: '',
+        username: ''
       },
-      gender: '',
       dialogVisible: false,
       attachmentId: null,
       checked: false
@@ -109,24 +108,24 @@ export default {
   },
   methods: {
     ...mapActions(['GET_USER_INFO', 'PUT_USER_INFO', 'GET_DOWNLOAD_TEMPLATE']),
-    modelDown () {
-      if (!this.checked) {
-        this.$message.error('请勾选同意条款')
-        return
-      }
-      this.download(this.attachmentId)
-      this.dialogVisible = false
-    },
-    // 打开弹框
-    openModel (attachmentId) {
-      this.checked = false
-      this.attachmentId = attachmentId
-      this.dialogVisible = true
-    },
-    // 下载附件
-    async download (attachmentId) {
-      this.GET_DOWNLOAD_TEMPLATE(attachmentId)
-    },
+    // modelDown () {
+    //   if (!this.checked) {
+    //     this.$message.error('请勾选同意条款')
+    //     return
+    //   }
+    //   this.download(this.attachmentId)
+    //   this.dialogVisible = false
+    // },
+    // // 打开弹框
+    // openModel (attachmentId) {
+    //   this.checked = false
+    //   this.attachmentId = attachmentId
+    //   this.dialogVisible = true
+    // },
+    // // 下载附件
+    // async download (attachmentId) {
+    //   this.GET_DOWNLOAD_TEMPLATE(attachmentId)
+    // },
     async editUserInfo () {
       const params = this.userForm
       const res = await this.PUT_USER_INFO(params)
@@ -139,9 +138,7 @@ export default {
       const res = await this.GET_USER_INFO()
       if (res.result === '0' && res.data) {
         this.userForm = res.data
-        this.userForm.gender === 0 && (this.gender = '未知')
-        this.userForm.gender === 1 && (this.gender = '男')
-        this.userForm.gender === 2 && (this.gender = '女')
+        sessionStorage.setItem('userInfo', JSON.stringify(res.data))
       }
       console.log(res)
     }

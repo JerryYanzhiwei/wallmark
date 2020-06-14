@@ -28,10 +28,12 @@ export default new Vuex.Store({
       const { data: res } = await axios.post(`/login/code?phone=${data.phone}&code=${data.verificationCode}`)
       return res
     },
+    // 获取验证码
     async POST_GET_CODE ({ commit }, data = {}) {
       const { data: res } = await axios.get(`/code?phone=${data.phone}`)
       return res
     },
+    // 注册
     async POST_REGISTRY ({ commit }, data = {}) {
       const { data: res } = await axios.post('/register', data)
       return res
@@ -59,11 +61,7 @@ export default new Vuex.Store({
     },
     // 队伍中心
     async GET_TEMP_CENTER ({ commit }, data = {}) {
-      let str = ''
-      data.teamApplys.map(item => {
-        str += '&teamApplys=' + item
-      })
-      const { data: res } = await axios.get(`/user/team/my?pageNo=${data.pageNo}&pageSize=${data.pageSize}${str}`)
+      const { data: res } = await axios.get('/user/teamMember/teamInfo')
       return res
     },
     // 申请加入队伍
