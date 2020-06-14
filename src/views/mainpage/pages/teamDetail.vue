@@ -1,6 +1,6 @@
 <template>
   <div v-if="teamInfo" class="team_info_container">
-    <PublicTitle color="#333" title="队伍信息" />
+    <!-- <PublicTitle color="#333" title="队伍信息" />
     <div class="leader_contain">
       <div class="leader_top">
         <div class="item">
@@ -58,18 +58,18 @@
           </el-tooltip>
         </div>
       </div>
-      <!-- <div class="leader_bottom">
+      <div class="leader_bottom">
         <div class="item">
           <span class="item_name">组队中</span>
         </div>
         <div class="item">
           <el-button size="mini">完成组队</el-button>
         </div>
-      </div> -->
+      </div>
       <div class="sign_out">
         <el-button size="mini">退出队伍</el-button>
       </div>
-    </div>
+    </div> -->
     <PublicTitle color="#333" title="队伍成员" />
     <div class="member_contain">
       <!-- 队伍成员 -->
@@ -102,7 +102,7 @@
         </div>
       </div>
     </div>
-    <PublicTitle color="#333" title="作品列表" />
+    <!-- <PublicTitle color="#333" title="作品列表" />
     <div class="work_list">
       <div v-for="(item, index) in teamInfo.attachments" :key="index">
         {{
@@ -110,7 +110,7 @@
         }}
         <i @click="downLoad(item)" class="iconfont icon-xiazai1"></i>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

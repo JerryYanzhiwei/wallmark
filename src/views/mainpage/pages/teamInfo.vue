@@ -3,12 +3,12 @@
     <PublicTitle title="队伍信息" />
     <div v-if="teamInfo" class="leader_contain">
       <div class="leader_top">
-        <div class="item">
+        <!-- <div class="item">
           <span class="item_name">编号: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.teamNo" placement="top-start">
             <span class="item_detail">{{teamInfo.teamNo}}</span>
           </el-tooltip>
-        </div>
+        </div> -->
         <div class="item">
           <span class="item_name">队伍: </span>
           <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.teamName"></el-input>
@@ -17,12 +17,6 @@
           <span class="item_name">队长: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.captain" placement="top-start">
             <span class="item_detail">{{teamInfo.captain}}</span>
-          </el-tooltip>
-        </div>
-        <div class="item">
-          <span class="item_name">院校: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.captain" placement="top-start">
-            <span class="item_detail">{{teamInfo.school}}</span>
           </el-tooltip>
         </div>
         <div class="item">
@@ -37,7 +31,7 @@
             <span class="item_detail">{{getProvince(teamInfo.matchZone, teamInfo.province)}}</span>
           </el-tooltip>
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <span class="item_name">方向: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.opusDirection" placement="top-start">
             <span class="item_detail">{{teamInfo.opusDirection}}</span>
@@ -48,14 +42,14 @@
           <el-tooltip class="item" effect="dark" :content="teamInfo.subject" placement="top-start">
             <span class="item_detail">{{teamInfo.subject}}</span>
           </el-tooltip>
-        </div>
+        </div> -->
         <div class="item">
-          <span class="item_name">队长电话: </span>
+          <span class="item_name">电话: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.captainPhone" placement="top-start">
             <span class="item_detail">{{teamInfo.captainPhone}}</span>
           </el-tooltip>
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <span class="item_name">指导老师: </span>
             <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.instructor"></el-input>
         </div>
@@ -70,26 +64,25 @@
         <div class="item">
           <span class="item_name">招募需求: </span>
             <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.recruitmentDemand"></el-input>
-        </div>
+        </div> -->
       </div>
       <div class="leader_bottom">
         <div class="item">
-          <span class="item_name">退出队伍</span>
+          <el-button size="mini"
+            >解散队伍</el-button>
         </div>
         <div class="item">
-          <span class="item_name">{{
-            teamInfo.teamState === 1 && '组队完成' ||
-            teamInfo.teamState === 0 && '发布中'
-            }}</span>
+          <el-button size="mini"
+            >添加队员</el-button>
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <el-button size="mini"
             @click="editTeamStatus(teamInfo.teamState)"
             >{{
             teamInfo.teamState === 1 && '发布组队' ||
             teamInfo.teamState === 0 && '组队完成'
             }}</el-button>
-        </div>
+        </div> -->
         <div class="item">
           <el-button size="mini"
             @click="editTeamInfo(teamInfo.teamNo)"
@@ -121,16 +114,17 @@
             <span class="detail">{{item.school}}</span>
           </p>
           <p class="item_detail">
-            <span class="title">专业: </span>
+            <span class="title">学历: </span>
             <span class="detail">{{item.profession}}</span>
           </p>
           <p class="item_detail">
-            <span class="title">年级: </span>
+            <span class="title">专业: </span>
             <span class="detail">{{item.grade}}</span>
           </p>
         </div>
-        <div @click="removeMember(item)" class="btn_contain">
-          移除队伍
+        <div class="btn_contain">
+          <span>编辑</span>
+          <span @click="removeMember(item)">移除</span>
         </div>
       </div>
     </div>
@@ -348,6 +342,9 @@ export default {
           }
         }
         .btn_contain {
+          display: flex;
+          justify-content: space-between;
+
           height: 40px;
           line-height: 40px;
           text-align: center;
@@ -356,6 +353,9 @@ export default {
           color: #fff;
           font-size: 14px;
           cursor: pointer;
+          span {
+            width: 50%;
+          }
         }
       }
     }

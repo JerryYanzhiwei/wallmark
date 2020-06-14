@@ -8,10 +8,6 @@
           <el-input v-model="userForm.name" size="mini"></el-input>
         </div>
         <div>
-          <span>性别: </span>
-          <el-input disabled v-model="gender" size="mini"></el-input>
-        </div>
-        <div>
           <span>手机: </span>
           <el-input disabled="" v-model="userForm.phone" size="mini"></el-input>
         </div>
@@ -24,25 +20,15 @@
           <el-input v-model="userForm.school" size="mini"></el-input>
         </div>
         <div>
-          <span>专业: </span>
+          <span>学历: </span>
           <el-input v-model="userForm.profession" size="mini"></el-input>
-        </div>
-        <div>
-          <span>年级: </span>
-          <el-input v-model="userForm.grade" size="mini"></el-input>
-        </div>
-        <div class="">
-          <span>备注:</span>
-          <el-input v-model="userForm.described" rows="3" resize="none" type="textarea"></el-input>
-        </div>
-        <div class="">
         </div>
       </div>
       <div class="btn_contain">
         <el-button @click="editUserInfo" size="mini">修改</el-button>
       </div>
     </div>
-    <PublicTitle title="赛题详情下载"/>
+    <!-- <PublicTitle title="赛题详情下载"/>
     <div class="user_contain ops_contain">
       <p>
         包装类课题介绍
@@ -87,7 +73,7 @@
       <span slot="footer" class="dialog-footer">
         <el-button type="primary" @click="modelDown">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 

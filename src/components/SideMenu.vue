@@ -41,11 +41,6 @@ export default {
           flag: this.userInfo.captainFlag
         },
         {
-          path: '/main/applyList',
-          title: '申请列表',
-          flag: this.userInfo.captainFlag
-        },
-        {
           path: '/main/worksSubmit',
           title: '作品提交',
           flag: this.userInfo.captainFlag

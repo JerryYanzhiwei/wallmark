@@ -61,7 +61,7 @@
       layout="prev, pager, next"
       :total="joinPage.recordNumber">
     </el-pagination>
-    <PublicTitle title="申请列表" color="#333" />
+    <!-- <PublicTitle title="申请列表" color="#333" />
     <div class="team_contain">
       <div v-if="!applyList.length" class="no_data">
         暂无数据
@@ -142,7 +142,7 @@
         <el-button @click="dialogVisible = false">取 消</el-button>
         <el-button type="danger" @click="submitApply">确 定</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
   </div>
 </template>
 

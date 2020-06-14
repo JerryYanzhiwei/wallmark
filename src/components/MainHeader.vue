@@ -1,7 +1,7 @@
 <template>
   <div class="main_header_container">
     <div @click="toModule" class="left_txt">
-      顺丰杯物流创新设计大赛
+      沃尔玛大赛
     </div>
     <div class="right">
       <span class="btn" @click="$router.push('/main')">{{userData.name}}</span>

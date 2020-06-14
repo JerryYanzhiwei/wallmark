@@ -80,7 +80,7 @@
         </div>
       </div>
     </div>
-    <PublicTitle title="作品进度" color="#fff" />
+    <PublicTitle title="作品进度"/>
     <div class="current_progress">
       <span class="progress">当前进度</span>
       <span class="bold process">{{processTxt}}</span>
