@@ -6,23 +6,25 @@
         <p>暂未加入任何队伍</p>
         <p @click="toCreate" class="create_team">快来创建队伍吧!</p>
       </div>
-      <div
-        v-else
-        @click="toDetail(item)"
-        class="team_item">
-        <div class="team_name">
-          <i class="iconfont icon-tuandui"></i>
-          <b class="name">{{item.teamName}}</b>
-          <span>{{item.teamNo}}</span>
-        </div>
-        <div class="item_contain">
-          <div class="item_detail">
-            <div class="title">队长: </div>
-            <div class="detail">{{item.captain}}</div>
+      <div v-else>
+        <div v-for="(item, index) in teamInfo.teamMembers"
+          :key="index"
+          @click="toDetail(item)"
+          class="team_item">
+          <div class="team_name">
+            <i class="iconfont icon-tuandui"></i>
+            <b class="name">{{item.teamName}}</b>
+            <span>{{item.teamNo}}</span>
           </div>
-          <div class="item_detail">
-            <div class="title">电话: </div>
-            <div class="detail">{{item.captainPhone}}</div>
+          <div class="item_contain">
+            <div class="item_detail">
+              <div class="title">队长: </div>
+              <div class="detail">{{item.captain}}</div>
+            </div>
+            <div class="item_detail">
+              <div class="title">电话: </div>
+              <div class="detail">{{item.captainPhone}}</div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,14 +51,14 @@ export default {
     this.getApplyList()
   },
   methods: {
-    ...mapActions(['GET_TEMP_CENTER']),
+    ...mapActions(['GET_TEAM_INFO']),
     // 去创建队伍
     toCreate () {
       this.$router.push('/main/createTeam')
     },
     // 查询申请列表 type 1: 已加入 2: 拒绝/申请中
     async getApplyList () {
-      const res = await this.GET_TEMP_CENTER()
+      const res = await this.GET_TEAM_INFO()
       console.log(res)
       if (res.result === '0' && res.data) {
         this.teamInfo = res.data

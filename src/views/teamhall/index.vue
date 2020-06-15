@@ -75,11 +75,11 @@
             </div>
             <div class="item_detail">
               <div class="title">赛区: </div>
-              <div class="detail">{{getZone(item.matchZone)}}</div>
+              <!-- <div class="detail">{{getZone(item.matchZone)}}</div> -->
             </div>
             <div class="item_detail">
               <div class="title">省份: </div>
-              <div class="detail">{{getProvince(item.matchZone, item.province)}}</div>
+              <!-- <div class="detail">{{getProvince(item.matchZone, item.province)}}</div> -->
             </div>
             <div class="item_detail">
               <div class="title">作品方向: </div>

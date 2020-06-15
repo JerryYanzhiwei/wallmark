@@ -21,15 +21,15 @@
         </div>
         <div class="item">
           <span class="item_name">赛区: </span>
-          <el-tooltip class="item" effect="dark" :content="getZone(teamInfo.matchZone)" placement="top-start">
-            <span class="item_detail">{{getZone(teamInfo.matchZone)}}</span>
-          </el-tooltip>
+          <!-- <el-tooltip class="item" effect="dark" :content="getZone(teamInfo.matchZone)" placement="top-start"> -->
+            <!-- <span class="item_detail">{{getZone(teamInfo.matchZone)}}</span> -->
+          <!-- </el-tooltip> -->
         </div>
         <div class="item">
           <span class="item_name">省份: </span>
-          <el-tooltip class="item" effect="dark" :content="getProvince(teamInfo.matchZone, teamInfo.province)" placement="top-start">
-            <span class="item_detail">{{getProvince(teamInfo.matchZone, teamInfo.province)}}</span>
-          </el-tooltip>
+          <!-- <el-tooltip class="item" effect="dark" :content="getProvince(teamInfo.matchZone, teamInfo.province)" placement="top-start"> -->
+            <!-- <span class="item_detail">{{getProvince(teamInfo.matchZone, teamInfo.province)}}</span> -->
+          <!-- </el-tooltip> -->
         </div>
         <!-- <div class="item">
           <span class="item_name">方向: </span>

@@ -2,34 +2,70 @@
   <div class="create_team_contain">
     <PublicTitle title="队伍名称" color="#333" />
     <div class="team_name_contain">
-      <el-input placeholder="请输入队伍名称" size="mini" v-model="createTeam.teamName" maxlength="20" type="text"/>
+      <el-input placeholder="请输入队伍名称" size="mini" v-model="teamName" maxlength="20" type="text"/>
+      <el-button @click="createMyTeam('teamForm')">创建队伍</el-button>
     </div>
     <PublicTitle title="队伍成员" color="#333" />
     <div class="member_contain">
-      <div v-for="(item, index) in teamMember" :key="index" class="member_item">
-        <span @click="delMember(index)" class="el-icon-close"></span>
-        <p>
-          <span>姓名</span>
-          <el-input v-model="item.username" size="mini"/>
-        </p>
-        <p>
-          <span>手机</span>
-          <el-input v-model="item.phone" size="mini"/>
-        </p>
-        <p>
-          <span>邮箱</span>
-          <el-input v-model="item.email" size="mini"/>
-        </p>
-        <p>
-          <span>学校</span>
-          <el-input v-model="item.school" size="mini"/>
-        </p>
-        <p>
-          <span>专业</span>
-          <el-input v-model="item.profession" size="mini"/>
-        </p>
-      </div>
-      <div v-if="teamMember.length < 5" @click="addMember" class="member_item add_member">
+      <el-form :model="formData" ref="teamForm" class="member_form" style="width:100%;">
+        <div v-for="(item, index) in formData.teamMembers" :key="index" class="member_item">
+          <span @click="delMember(index)" class="el-icon-close"></span>
+          <el-form-item label="姓名"
+            :prop="'teamMembers.' + index + '.username'"
+            :rules="{
+              required: true, message: '姓名不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="item.username" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="手机"
+            :prop="'teamMembers.' + index + '.phone'"
+            :rules="{
+              required: true, message: '姓名不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="item.phone" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="邮箱"
+            :prop="'teamMembers.' + index + '.email'"
+            :rules="{
+              required: true, message: '邮箱不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="item.email" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="学校"
+            :prop="'teamMembers.' + index + '.school'"
+            :rules="{
+              required: true, message: '学校不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="item.school" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="专业"
+            :prop="'teamMembers.' + index + '.profession'"
+            :rules="{
+              required: true, message: '专业不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="item.profession" size="mini"/>
+          </el-form-item>
+          <el-form-item label="学历"
+            :prop="'teamMembers.' + index + '.degree'"
+            :rules="{
+              required: true, message: '学历不能为空', trigger: 'blur'
+            }">
+             <el-select size="mini" v-model="item.degree" placeholder="请选择">
+              <el-option
+                v-for="item in DegreeData"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </div>
+      </el-form>
+      <div v-if="formData.teamMembers.length < 5" @click="addMember" class="member_item add_member">
         <i class="el-icon-plus"></i>
         <p>添加队员</p>
       </div>
@@ -39,51 +75,84 @@
 
 <script>
 import PublicTitle from '@/components/public_title.vue'
+import DegreeData from '@/config/degree.js'
+import { mapActions } from 'vuex'
+
 export default {
   components: {
     PublicTitle
   },
   data () {
     return {
-      createTeam: {},
-      teamMember: [
-        {
-          username: '',
-          phone: '',
-          email: '',
-          school: '',
-          profession: ''
-        },
-        {
-          username: '',
-          phone: '',
-          email: '',
-          school: '',
-          profession: ''
-        },
-        {
-          username: '',
-          phone: '',
-          email: '',
-          school: '',
-          profession: ''
-        }
-      ]
+      DegreeData,
+      teamName: '很6团队',
+      formData: {
+        teamMembers: [
+          {
+            username: '江湖一',
+            phone: '18682096857',
+            email: 'qq3@qq.com',
+            school: '江湖大学',
+            profession: '演员',
+            degree: ''
+          },
+          {
+            username: '江湖三',
+            phone: '18682096856',
+            email: 'qq3@qq.com',
+            school: '江湖大学',
+            profession: '演员',
+            degree: ''
+          },
+          {
+            username: '江湖二',
+            phone: '18682096854',
+            email: 'qq3@qq.com',
+            school: '江湖大学',
+            profession: '演员',
+            degree: ''
+          }
+        ]
+      }
     }
   },
   methods: {
+    ...mapActions(['POST_CREATE_TEAM']),
+
     // 删除成员
     delMember (index) {
-      this.teamMember.splice(index, 1)
+      this.formData.teamMembers.splice(index, 1)
     },
     // 添加成员
     addMember () {
-      this.teamMember.push({
+      this.formData.teamMembers.push({
         username: '',
         phone: '',
         email: '',
         school: '',
-        profession: ''
+        profession: '',
+        degree: ''
+      })
+    },
+    // 创建队伍
+    async createMyTeam (formName) {
+      this.$refs[formName].validate(async (valid) => {
+        if (valid) {
+          try {
+            this.formData.teamName = this.teamName
+            const res = await this.POST_CREATE_TEAM(this.formData)
+            console.log(res)
+            if (res.result === '0' && res.data) {
+              console.log('创建成功')
+              this.$message.success('创建队伍成功')
+            }
+          } catch (e) {
+            console.log(e)
+          }
+        } else {
+          console.log('error submit!!')
+          return false
+        }
       })
     }
   }
@@ -93,13 +162,17 @@ export default {
 <style lang="scss" scoped>
 .create_team_contain {
   .team_name_contain {
+    display: flex;
     padding-top: 15px;
     width: 30%;
     margin-bottom: 30px;
   }
   .member_contain {
-    display: flex;
-    flex-wrap: wrap;
+    .member_form {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+    }
     .member_item {
       padding: 20px;
       width: 30%;
@@ -134,6 +207,28 @@ export default {
           font-size: 50px;
         }
       }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.create_team_contain {
+  .member_contain {
+    .el-input {
+      width: 100%;
+    }
+    .el-form-item__content {
+      line-height:36px;
+    }
+    .el-form-item {
+      margin-bottom: 20px;
+    }
+    .el-form-item__label {
+      line-height:20px;
+    }
+    .el-form-item__error {
+      padding-top:2px;
     }
   }
 }

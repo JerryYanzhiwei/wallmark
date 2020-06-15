@@ -71,7 +71,12 @@ export default new Vuex.Store({
     },
     // 创建队伍
     async POST_CREATE_TEAM ({ commit }, data = {}) {
-      const { data: res } = await axios.post('/user/team', data)
+      const { data: res } = await axios.post('/user/teamInfo', data)
+      return res
+    },
+    // 获取队伍信息
+    async GET_TEAM_INFO ({ commit }, data = {}) {
+      const { data: res } = await axios.get('/user/teamInfo', data)
       return res
     },
     /**
