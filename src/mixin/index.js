@@ -1,7 +1,12 @@
 import jsonData from '@/config/province.js'
+import degreeData from '@/config/degree.js'
 
 export default {
   methods: {
+    filterDegree (degree) {
+      const arr = degreeData.filter((item) => item.value === degree)
+      return arr[0].label
+    },
     /* 手机 */
     validatePhone (str) {
       const reg = /^[1]{1}[\d]{10}$/

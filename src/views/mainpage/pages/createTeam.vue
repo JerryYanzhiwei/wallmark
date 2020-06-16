@@ -3,7 +3,7 @@
     <PublicTitle title="队伍名称" color="#333" />
     <div class="team_name_contain">
       <el-input placeholder="请输入队伍名称" size="mini" v-model="teamName" maxlength="20" type="text"/>
-      <el-button @click="createMyTeam('teamForm')">创建队伍</el-button>
+      <el-button class="create_btn" size="mini" @click="createMyTeam('teamForm')">创建队伍</el-button>
     </div>
     <PublicTitle title="队伍成员" color="#333" />
     <div class="member_contain">
@@ -21,7 +21,7 @@
           <el-form-item label="手机"
             :prop="'teamMembers.' + index + '.phone'"
             :rules="{
-              required: true, message: '姓名不能为空', trigger: 'blur'
+              required: true, message: '手机不能为空', trigger: 'blur'
             }">
             <el-input v-model="item.phone" size="mini"/>
           </el-form-item>
@@ -64,11 +64,11 @@
             </el-select>
           </el-form-item>
         </div>
+        <div v-if="formData.teamMembers.length < 5" @click="addMember" class="member_item add_member">
+          <i class="el-icon-plus"></i>
+          <p>添加队员</p>
+        </div>
       </el-form>
-      <div v-if="formData.teamMembers.length < 5" @click="addMember" class="member_item add_member">
-        <i class="el-icon-plus"></i>
-        <p>添加队员</p>
-      </div>
     </div>
   </div>
 </template>
@@ -85,31 +85,31 @@ export default {
   data () {
     return {
       DegreeData,
-      teamName: '很6团队',
+      teamName: '',
       formData: {
         teamMembers: [
           {
-            username: '江湖一',
-            phone: '18682096857',
-            email: 'qq3@qq.com',
-            school: '江湖大学',
-            profession: '演员',
+            username: '',
+            phone: '',
+            email: '',
+            school: '',
+            profession: '',
             degree: ''
           },
           {
-            username: '江湖三',
-            phone: '18682096856',
-            email: 'qq3@qq.com',
-            school: '江湖大学',
-            profession: '演员',
+            username: '',
+            phone: '',
+            email: '',
+            school: '',
+            profession: '',
             degree: ''
           },
           {
-            username: '江湖二',
-            phone: '18682096854',
-            email: 'qq3@qq.com',
-            school: '江湖大学',
-            profession: '演员',
+            username: '',
+            phone: '',
+            email: '',
+            school: '',
+            profession: '',
             degree: ''
           }
         ]
@@ -166,6 +166,9 @@ export default {
     padding-top: 15px;
     width: 30%;
     margin-bottom: 30px;
+    .create_btn {
+      margin-left: 10px;
+    }
   }
   .member_contain {
     .member_form {
@@ -231,5 +234,8 @@ export default {
       padding-top:2px;
     }
   }
+}
+.el-select {
+  width: 100%;
 }
 </style>

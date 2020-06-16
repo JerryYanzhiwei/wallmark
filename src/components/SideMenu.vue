@@ -31,7 +31,7 @@ export default {
           flag: true
         },
         {
-          path: '/main/teamCenter',
+          path: '/main/teamDetail',
           title: '队伍中心',
           flag: true
         },

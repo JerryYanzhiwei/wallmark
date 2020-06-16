@@ -76,7 +76,7 @@ export default new Vuex.Store({
     },
     // 获取队伍信息
     async GET_TEAM_INFO ({ commit }, data = {}) {
-      const { data: res } = await axios.get('/user/teamInfo', data)
+      const { data: res } = await axios.get('/user/teamMember/teamInfo', data)
       return res
     },
     /**

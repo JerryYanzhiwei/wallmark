@@ -6,50 +6,23 @@
         <p>暂未加入任何队伍</p>
         <p @click="toCreate" class="create_team">快来创建队伍吧!</p>
       </div>
-
-      <div v-else class="ranks_box">
-        <div v-for="(item, index) in teamInfo.teamMembers"
-          :key="index"
-          class="team_item">
-          <div class="team_name">
-            <i class="iconfont icon-tuandui"></i>
-            <b class="name">{{item.username}}</b>
-            <!-- <span>{{item.username}}</span> -->
+      <div
+        v-if="teamInfo"
+        @click="toDetail(teamInfo)"
+        class="team_item">
+        <div class="team_name">
+          <i class="iconfont icon-tuandui"></i>
+          <b class="name">{{teamInfo.teamName}}</b>
+          <span>{{teamInfo.teamNo}}</span>
+        </div>
+        <div class="item_contain">
+          <div class="item_detail">
+            <div class="title">队长: </div>
+            <div class="detail">{{teamInfo.captainName}}</div>
           </div>
-          <div class="item_contain">
-            <div class="item_detail">
-              <div class="title">编号: </div>
-              <div class="detail">{{item.teamId}}</div>
-            </div>
-            <div class="item_detail">
-              <div class="title">电话: </div>
-              <div class="detail">{{item.phone}}</div>
-            </div>
-            <div class="item_detail">
-              <div class="title">邮箱: </div>
-              <div class="detail">{{item.email}}</div>
-            </div>
-            <div class="item_detail">
-              <div class="title">学校: </div>
-              <div class="detail">{{item.school}}</div>
-            </div>
-            <div class="item_detail">
-              <div class="title">学历: </div>
-              <div class="detail">{{item.degree}}</div>
-            </div>
-            <div class="item_detail">
-              <div class="title">专业: </div>
-              <div class="detail">{{item.profession}}</div>
-            </div>
-
-            <div class="item_detail" style="justify-content: center;margin-top: 30px;" v-if="captainFlag">
-              <el-button @click="updateInfo(item)">修改信息</el-button>
-              <el-button @click="removeTeam(item)">移除队员</el-button>
-            </div>
-
-            <div class="item_detail" style="justify-content: center;margin-top: 30px;" v-else>
-              <el-button>退出队伍</el-button>
-            </div>
+          <div class="item_detail">
+            <div class="title">电话: </div>
+            <div class="detail">{{teamInfo.captainPhone}}</div>
           </div>
         </div>
       </div>
@@ -67,20 +40,12 @@ export default {
   },
   data () {
     return {
-      captainFlag: false, // 是否是队长
-      accountId: -1, // 用户id
       teamInfo: null,
-      dialogVisible: true,
-      createTeam: {}
+      dialogVisible: true
     }
   },
   created () {
-    this.getApplyList()
-    const { captainFlag, accountId } = JSON.parse(sessionStorage.getItem('userInfo'))
-    this.accountId = accountId
-    this.captainFlag = captainFlag
-
-    console.log(this.userInfo)
+    this.getTeamInfo()
   },
   methods: {
     ...mapActions(['GET_TEAM_INFO']),
@@ -89,7 +54,7 @@ export default {
       this.$router.push('/main/createTeam')
     },
     // 查询申请列表 type 1: 已加入 2: 拒绝/申请中
-    async getApplyList () {
+    async getTeamInfo () {
       const res = await this.GET_TEAM_INFO()
       console.log(res)
       if (res.result === '0' && res.data) {
@@ -101,7 +66,7 @@ export default {
       this.$router.push({
         path: 'teamDetail',
         query: {
-          id: data.teamNo
+          id: data.teamId
         }
       })
     },
@@ -119,12 +84,10 @@ export default {
       width: 100%;
       text-align: center;
       padding: 20px 0;
-      p {
-        margin: 20px 0;
-      }
       .create_team {
+        margin-top: 10px;
         color: #1989fa;
-        cursor: pointer;
+        cursor:  pointer;
       }
     }
     .iconfont {
@@ -136,13 +99,6 @@ export default {
       &.added_contain {
         margin-bottom: 30px;
       }
-
-      .ranks_box {
-        width: 100%;
-        display: flex;
-        flex-wrap: wrap;
-      }
-
       .team_item {
         width: 31%;
         padding: 20px 0;
@@ -153,7 +109,7 @@ export default {
 
         background-color: $card_bg_color;
         border: 2px solid $border_color;
-        box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+        box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
         border-radius: 10px;
         cursor: pointer;
         &.apply_contain {
@@ -164,7 +120,7 @@ export default {
             position: absolute;
             top: 10px;
             left: 10px;
-            color: $card_font_color;
+            color: #333;
           }
         }
         transition: all .2s linear;
@@ -183,15 +139,15 @@ export default {
           font-size: 16px;
           font-weight: bold;
           i {
-            color: #fff;
+            color: #333;
           }
           span {
             font-size: 12px;
             font-weight: normal;
-            color: #fff;
+            color: #333;
           }
           .name {
-            color: $card_font_color;
+            color: #333;
           }
         }
         .item_contain {
@@ -202,7 +158,7 @@ export default {
             margin-bottom: 15px;
 
             font-size: 14px;
-            color: $card_font_color;
+            color: #333;
             .title {
               width: 30%;
               padding-right: 5px;
@@ -219,7 +175,6 @@ export default {
             }
             .detail {
               width: 78%;
-              color: $card_font_color;
 
               text-overflow: -o-ellipsis-lastline;
               overflow: hidden;

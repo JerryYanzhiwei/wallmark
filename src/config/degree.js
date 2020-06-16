@@ -12,7 +12,7 @@ export default [
     value: 2
   },
   {
-    label: '研究生',
+    label: '博士',
     value: 3
   }
 ]
