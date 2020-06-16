@@ -1,5 +1,5 @@
 <template>
-  <div v-if="teamInfo" class="team_info_container">
+  <div class="team_info_container">
     <!-- <PublicTitle color="#333" title="队伍信息" />
     <div class="leader_contain">
       <div class="leader_top">
@@ -71,12 +71,16 @@
       </div>
     </div> -->
     <PublicTitle color="#333" title="队伍成员" />
-    <div class="member_contain">
+    <div v-if="!teamInfo" class="no_data">
+      <p>暂未加入任何队伍</p>
+      <p @click="toCreate" class="create_team">快来创建队伍吧!</p>
+    </div>
+    <div v-if="teamInfo" class="member_contain">
       <!-- 队伍成员 -->
       <div v-for="(item, index) in teamInfo.teamMembers" :key="index" class="member_item">
         <div class="member_name">
           <i class="iconfont icon-shouhuoren"></i>
-          {{item.name}}
+          {{item.username}}
         </div>
         <div class="item_contain">
           <p class="item_detail">
@@ -96,8 +100,8 @@
             <span class="detail">{{item.profession}}</span>
           </p>
           <p class="item_detail">
-            <span class="title">年级: </span>
-            <span class="detail">{{item.grade}}</span>
+            <span class="title">学历: </span>
+            <span class="detail">{{filterDegree(item.degree)}}</span>
           </p>
         </div>
       </div>
@@ -127,19 +131,19 @@ export default {
     }
   },
   created () {
-    this.getDetail()
+    this.getTeamInfo()
   },
   methods: {
-    ...mapActions(['GET_JOIN_DETAIL', 'GET_FILE_DOWNLOAD']),
-    async getDetail () {
-      const params = {
-        teamNo: this.$route.query.id
-      }
-      const res = await this.GET_JOIN_DETAIL({ params })
+    ...mapActions(['GET_TEAM_INFO']),
+    async getTeamInfo () {
+      const res = await this.GET_TEAM_INFO()
+      console.log(res)
       if (res.result === '0' && res.data) {
         this.teamInfo = res.data
       }
-      console.log(res)
+    },
+    toCreate () {
+      this.$router.push('/main/createTeam')
     },
     async downLoad (file) {
       window.open(`http://47.103.28.48:8080/match-service/user/teamInfo/dowload/attachment?attachmentId=${file.attachmentId}`)
@@ -150,6 +154,16 @@ export default {
 
 <style lang="scss" scoped>
   .team_info_container {
+    .no_data {
+      width: 100%;
+      text-align: center;
+      padding: 20px 0;
+      .create_team {
+        margin-top: 10px;
+        color: #1989fa;
+        cursor:  pointer;
+      }
+    }
     .iconfont {
       font-size: 13px;
     }
