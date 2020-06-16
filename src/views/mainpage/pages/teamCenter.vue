@@ -1,29 +1,54 @@
 <template>
   <div class="team_cener_container">
-    <PublicTitle title="已加入" color="#333" />
+    <PublicTitle title="我的队伍" color="#333" />
     <div class="team_contain added_contain">
       <div v-if="!teamInfo" class="no_data">
         <p>暂未加入任何队伍</p>
         <p @click="toCreate" class="create_team">快来创建队伍吧!</p>
       </div>
-      <div v-else>
+
+      <div v-else class="ranks_box">
         <div v-for="(item, index) in teamInfo.teamMembers"
           :key="index"
-          @click="toDetail(item)"
           class="team_item">
           <div class="team_name">
             <i class="iconfont icon-tuandui"></i>
-            <b class="name">{{item.teamName}}</b>
-            <span>{{item.teamNo}}</span>
+            <b class="name">{{item.username}}</b>
+            <!-- <span>{{item.username}}</span> -->
           </div>
           <div class="item_contain">
             <div class="item_detail">
-              <div class="title">队长: </div>
-              <div class="detail">{{item.captain}}</div>
+              <div class="title">编号: </div>
+              <div class="detail">{{item.teamId}}</div>
             </div>
             <div class="item_detail">
               <div class="title">电话: </div>
-              <div class="detail">{{item.captainPhone}}</div>
+              <div class="detail">{{item.phone}}</div>
+            </div>
+            <div class="item_detail">
+              <div class="title">邮箱: </div>
+              <div class="detail">{{item.email}}</div>
+            </div>
+            <div class="item_detail">
+              <div class="title">学校: </div>
+              <div class="detail">{{item.school}}</div>
+            </div>
+            <div class="item_detail">
+              <div class="title">学历: </div>
+              <div class="detail">{{item.degree}}</div>
+            </div>
+            <div class="item_detail">
+              <div class="title">专业: </div>
+              <div class="detail">{{item.profession}}</div>
+            </div>
+
+            <div class="item_detail" style="justify-content: center;margin-top: 30px;" v-if="captainFlag">
+              <el-button @click="updateInfo(item)">修改信息</el-button>
+              <el-button @click="removeTeam(item)">移除队员</el-button>
+            </div>
+
+            <div class="item_detail" style="justify-content: center;margin-top: 30px;" v-else>
+              <el-button>退出队伍</el-button>
             </div>
           </div>
         </div>
@@ -42,6 +67,8 @@ export default {
   },
   data () {
     return {
+      captainFlag: false, // 是否是队长
+      accountId: -1, // 用户id
       teamInfo: null,
       dialogVisible: true,
       createTeam: {}
@@ -49,6 +76,11 @@ export default {
   },
   created () {
     this.getApplyList()
+    const { captainFlag, accountId } = JSON.parse(sessionStorage.getItem('userInfo'))
+    this.accountId = accountId
+    this.captainFlag = captainFlag
+
+    console.log(this.userInfo)
   },
   methods: {
     ...mapActions(['GET_TEAM_INFO']),
@@ -72,7 +104,11 @@ export default {
           id: data.teamNo
         }
       })
-    }
+    },
+    // 修改队员信息
+    updateInfo (data) {},
+    // 移除队员
+    removeTeam (data) {}
   }
 }
 </script>
@@ -100,6 +136,13 @@ export default {
       &.added_contain {
         margin-bottom: 30px;
       }
+
+      .ranks_box {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
       .team_item {
         width: 31%;
         padding: 20px 0;
