@@ -79,6 +79,16 @@ export default new Vuex.Store({
       const { data: res } = await axios.get('/user/teamInfo', data)
       return res
     },
+    // 添加队员
+    async POST_TEAM_ADD ({ commit }, data = {}) {
+      const { data: res } = await axios.post('/user/replenishTeamMember?teamId=' + data.teamId, data.teamMembers)
+      return res
+    },
+    // 编辑队员
+    async PUT_TEAM_EDIT ({ commit }, data = {}) {
+      const { data: res } = await axios.put('/user/teamMemberInfo?accountId=' + data.accountId, data.params)
+      return res
+    },
     /**
      * 团队管理信息
      */
@@ -110,7 +120,7 @@ export default new Vuex.Store({
     },
     // 移除队员
     async PUT_REMOVE_MEMBER ({ commit }, data = {}) {
-      const { data: res } = await axios.put(`/user/teamInfo/remove?teamMemberId=${data.teamMemberId}&teamNo=${data.teamNo}`)
+      const { data: res } = await axios.put(`/user/teamInfo/remove?teamMemberId=${data.teamMemberId}&teamId=${data.teamId}`)
       return res
     },
     /**

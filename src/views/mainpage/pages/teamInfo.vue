@@ -69,10 +69,12 @@
       <div class="leader_bottom">
         <div class="item">
           <el-button size="mini"
+            @click="dissolution"
             >解散队伍</el-button>
         </div>
         <div class="item">
           <el-button size="mini"
+          @click="addTeam"
             >添加队员</el-button>
         </div>
         <!-- <div class="item">
@@ -123,23 +125,92 @@
           </p>
         </div>
         <div class="btn_contain">
-          <span>编辑</span>
+          <span @click="editMember(item)">编辑</span>
           <span @click="removeMember(item)">移除</span>
         </div>
       </div>
     </div>
+
+    <!-- 弹层 -->
+    <el-dialog title="编辑信息" :visible.sync="dialogFormVisible">
+      <!-- <el-form :model="form">
+        <el-form-item label="姓名"
+            :prop="username"
+            :rules="{
+              required: true, message: '姓名不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="username" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="手机"
+            :prop="phone"
+            :rules="{
+              required: true, message: '姓名不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="phone" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="邮箱"
+            :prop="email"
+            :rules="{
+              required: true, message: '邮箱不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="email" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="学校"
+            :prop="school"
+            :rules="{
+              required: true, message: '学校不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="school" size="mini"/>
+          </el-form-item>
+
+          <el-form-item label="专业"
+            :prop="profession"
+            :rules="{
+              required: true, message: '专业不能为空', trigger: 'blur'
+            }">
+            <el-input v-model="profession" size="mini"/>
+          </el-form-item>
+          <el-form-item label="学历"
+            :prop="degree"
+            :rules="{
+              required: true, message: '学历不能为空', trigger: 'blur'
+            }">
+             <el-select size="mini" v-model="degree" placeholder="请选择">
+              <el-option
+                v-for="item in DegreeData"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+      </el-form> -->
+      <div slot="footer" class="dialog-footer">
+        <el-button @click="dialogFormVisible = false">取 消</el-button>
+        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+      </div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import PublicTitle from '@/components/public_title.vue'
+import DegreeData from '@/config/degree.js'
+
 export default {
   components: {
     PublicTitle
   },
   data () {
     return {
+      DegreeData,
+      formLabelWidth: '120px',
+      form: {},
+      dialogFormVisible: false,
       canEdit: false,
       teamInfo: {
         teamNo: '',
@@ -160,7 +231,7 @@ export default {
     this.getTeamInfo()
   },
   methods: {
-    ...mapActions(['GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO']),
+    ...mapActions(['PUT_TEAM_EDIT', 'POST_TEAM_ADD', 'GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO']),
     async getTeamInfo () {
       const res = await this.GET_MY_TEAM_INFO()
       if (res.result === '0' && res.data) {
@@ -206,10 +277,11 @@ export default {
         this.getTeamInfo()
       }
     },
+    // 移除
     async removeMember (data) {
       const res = await this.PUT_REMOVE_MEMBER({
         teamMemberId: data.teamMemberId,
-        teamNo: this.teamInfo.teamNo
+        teamId: this.teamInfo.teamId
       })
       if (res.result === '0' && res.data) {
         this.$message.success('移除成功')
@@ -222,6 +294,53 @@ export default {
         teamState: status ? 0 : 1
       })
       console.log(res)
+    },
+    // 编辑队员
+    async editMember (item) {
+      console.log(item)
+      try {
+        const params = {
+          accountId: '3',
+          params: {
+            degree: '0',
+            email: 'qq@qq.com',
+            profession: '技师',
+            school: '江湖大学',
+            username: '江湖999'
+          }
+        }
+        const res = await this.PUT_TEAM_EDIT(params)
+        console.log(res)
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    // 解散队伍
+    dissolution () {
+      //
+    },
+    // 添加队员
+    async addTeam () {
+      this.dialogFormVisible = true
+      // try {
+      //   const params = {
+      //     teamId: 1,
+      //     teamMembers: [
+      //       {
+      //         degree: '0',
+      //         email: 'qq@qq.com',
+      //         phone: '13428722221',
+      //         profession: '技师',
+      //         school: '江湖大学',
+      //         username: '志伟'
+      //       }
+      //     ]
+      //   }
+      //   const res = await this.POST_TEAM_ADD(params)
+      //   console.log(res)
+      // } catch (e) {
+      //   console.log(e)
+      // }
     }
   }
 }
