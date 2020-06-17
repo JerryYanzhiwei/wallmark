@@ -132,65 +132,66 @@
     </div>
 
     <!-- 弹层 -->
-    <el-dialog title="编辑信息" :visible.sync="dialogFormVisible">
-      <!-- <el-form :model="form">
+    <el-dialog :title="isAdd ? '添加队员':'编辑队员'" :visible.sync="dialogFormVisible">
+      <el-form :model="form" label-width="80px">
         <el-form-item label="姓名"
-            :prop="username"
-            :rules="{
-              required: true, message: '姓名不能为空', trigger: 'blur'
-            }">
-            <el-input v-model="username" size="mini"/>
-          </el-form-item>
+          prop="username"
+          :rules="{
+            required: true, message: '姓名不能为空', trigger: 'blur'
+          }">
+          <el-input v-model="form.username" size="mini"/>
+        </el-form-item>
 
-          <el-form-item label="手机"
-            :prop="phone"
-            :rules="{
-              required: true, message: '姓名不能为空', trigger: 'blur'
-            }">
-            <el-input v-model="phone" size="mini"/>
-          </el-form-item>
+        <el-form-item label="手机"
+          v-if="isAdd"
+          prop="phone"
+          :rules="{
+            required: true, message: '姓名不能为空', trigger: 'blur'
+          }">
+          <el-input v-model="form.phone" size="mini"/>
+        </el-form-item>
 
-          <el-form-item label="邮箱"
-            :prop="email"
-            :rules="{
-              required: true, message: '邮箱不能为空', trigger: 'blur'
-            }">
-            <el-input v-model="email" size="mini"/>
-          </el-form-item>
+        <el-form-item label="邮箱"
+          prop="email"
+          :rules="{
+            required: true, message: '邮箱不能为空', trigger: 'blur'
+          }">
+          <el-input v-model="form.email" size="mini"/>
+        </el-form-item>
 
-          <el-form-item label="学校"
-            :prop="school"
-            :rules="{
-              required: true, message: '学校不能为空', trigger: 'blur'
-            }">
-            <el-input v-model="school" size="mini"/>
-          </el-form-item>
+        <el-form-item label="学校"
+          prop="school"
+          :rules="{
+            required: true, message: '学校不能为空', trigger: 'blur'
+          }">
+          <el-input v-model="form.school" size="mini"/>
+        </el-form-item>
 
-          <el-form-item label="专业"
-            :prop="profession"
-            :rules="{
-              required: true, message: '专业不能为空', trigger: 'blur'
-            }">
-            <el-input v-model="profession" size="mini"/>
-          </el-form-item>
-          <el-form-item label="学历"
-            :prop="degree"
-            :rules="{
-              required: true, message: '学历不能为空', trigger: 'blur'
-            }">
-             <el-select size="mini" v-model="degree" placeholder="请选择">
-              <el-option
-                v-for="item in DegreeData"
-                :key="item.value"
-                :label="item.label"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-      </el-form> -->
+        <el-form-item label="专业"
+          prop="profession"
+          :rules="{
+            required: true, message: '专业不能为空', trigger: 'blur'
+          }">
+          <el-input v-model="form.profession" size="mini"/>
+        </el-form-item>
+        <el-form-item label="学历"
+          prop="degree"
+          :rules="{
+            required: true, message: '学历不能为空', trigger: 'blur'
+          }">
+            <el-select size="mini" v-model="form.degree" placeholder="请选择">
+            <el-option
+              v-for="item in DegreeData"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogFormVisible = false">确 定</el-button>
+        <el-button type="primary" @click="submit">确 定</el-button>
       </div>
     </el-dialog>
   </div>
@@ -208,7 +209,7 @@ export default {
   data () {
     return {
       DegreeData,
-      formLabelWidth: '120px',
+      isAdd: false,
       form: {},
       dialogFormVisible: false,
       canEdit: false,
@@ -296,51 +297,63 @@ export default {
       console.log(res)
     },
     // 编辑队员
-    async editMember (item) {
-      console.log(item)
-      try {
-        const params = {
-          accountId: '3',
-          params: {
-            degree: '0',
-            email: 'qq@qq.com',
-            profession: '技师',
-            school: '江湖大学',
-            username: '江湖999'
-          }
-        }
-        const res = await this.PUT_TEAM_EDIT(params)
-        console.log(res)
-      } catch (e) {
-        console.log(e)
-      }
+    editMember (item) {
+      this.form = {}
+      this.isAdd = false
+      this.dialogFormVisible = true
+      this.form = JSON.parse(JSON.stringify(item))
     },
     // 解散队伍
     dissolution () {
       //
     },
     // 添加队员
-    async addTeam () {
+    addTeam () {
+      this.form = {}
+      this.isAdd = true
       this.dialogFormVisible = true
-      // try {
-      //   const params = {
-      //     teamId: 1,
-      //     teamMembers: [
-      //       {
-      //         degree: '0',
-      //         email: 'qq@qq.com',
-      //         phone: '13428722221',
-      //         profession: '技师',
-      //         school: '江湖大学',
-      //         username: '志伟'
-      //       }
-      //     ]
-      //   }
-      //   const res = await this.POST_TEAM_ADD(params)
-      //   console.log(res)
-      // } catch (e) {
-      //   console.log(e)
-      // }
+    },
+    // 编辑或者新增队员
+    async submit () {
+      this.dialogFormVisible = false
+      if (this.isAdd) {
+        // 新增
+        try {
+          const list = []
+          list.push(this.form)
+          const params = {
+            teamId: this.teamInfo.teamId,
+            teamMembers: list
+          }
+          console.log(params)
+          const res = await this.POST_TEAM_ADD(params)
+          console.log(res)
+          // 查询
+          this.getTeamInfo()
+        } catch (e) {
+          console.log(e)
+        }
+      } else {
+        // 编辑
+        try {
+          const obj = {
+            degree: this.form.degree,
+            email: this.form.email,
+            profession: this.form.profession,
+            school: this.form.school,
+            username: this.form.username
+          }
+          const params = {
+            accountId: this.form.accountId,
+            params: obj
+          }
+          console.log(params)
+          const res = await this.PUT_TEAM_EDIT(params)
+          console.log(res)
+        } catch (e) {
+          console.log(e)
+        }
+      }
     }
   }
 }
@@ -485,6 +498,20 @@ export default {
   .leader_top {
     .el-input {
       width: 60%;
+    }
+  }
+  .team_info_container {
+    .el-dialog__wrapper {
+      .el-dialog__body {
+        .el-form {
+          justify-content: space-between;
+          display: flex;
+          flex-wrap: wrap;
+          .el-form-item {
+            width: 50%;
+          }
+        }
+      }
     }
   }
 </style>
