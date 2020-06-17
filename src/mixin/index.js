@@ -4,6 +4,7 @@ import degreeData from '@/config/degree.js'
 export default {
   methods: {
     filterDegree (degree) {
+      if (!degree) return
       const arr = degreeData.filter((item) => item.value === degree)
       return arr[0].label
     },

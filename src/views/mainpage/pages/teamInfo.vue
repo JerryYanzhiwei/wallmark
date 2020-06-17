@@ -19,18 +19,18 @@
             <span class="item_detail">{{teamInfo.captainName}}</span>
           </el-tooltip>
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <span class="item_name">赛区: </span>
-          <!-- <el-tooltip class="item" effect="dark" :content="getZone(teamInfo.matchZone)" placement="top-start"> -->
-            <!-- <span class="item_detail">{{getZone(teamInfo.matchZone)}}</span> -->
-          <!-- </el-tooltip> -->
-        </div>
-        <div class="item">
+          <el-tooltip class="item" effect="dark" :content="getZone(teamInfo.matchZone)" placement="top-start">
+            <span class="item_detail">{{getZone(teamInfo.matchZone)}}</span>
+          </el-tooltip>
+        </div> -->
+        <!-- <div class="item">
           <span class="item_name">省份: </span>
-          <!-- <el-tooltip class="item" effect="dark" :content="getProvince(teamInfo.matchZone, teamInfo.province)" placement="top-start"> -->
-            <!-- <span class="item_detail">{{getProvince(teamInfo.matchZone, teamInfo.province)}}</span> -->
-          <!-- </el-tooltip> -->
-        </div>
+          <el-tooltip class="item" effect="dark" :content="getProvince(teamInfo.matchZone, teamInfo.province)" placement="top-start">
+            <span class="item_detail">{{getProvince(teamInfo.matchZone, teamInfo.province)}}</span>
+          </el-tooltip>
+        </div> -->
         <!-- <div class="item">
           <span class="item_name">方向: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.opusDirection" placement="top-start">
@@ -49,12 +49,12 @@
             <span class="item_detail">{{teamInfo.captainPhone}}</span>
           </el-tooltip>
         </div>
-        <div class="item">
+        <!-- <div class="item">
           <span class="item_name">进度: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.captainPhone" placement="top-start">
             <span class="item_detail">{{getProgress(teamInfo.progress)}}</span>
           </el-tooltip>
-        </div>
+        </div> -->
         <!-- <div class="item">
           <span class="item_name">指导老师: </span>
             <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.instructor"></el-input>
@@ -106,7 +106,7 @@
       <div v-for="(item, index) in teamInfo.teamMembers" :key="index" class="member_item">
         <div class="member_name">
           <i class="iconfont icon-shouhuoren"></i>
-          {{item.name}}
+          {{item.username}}
         </div>
         <div class="item_contain">
           <p class="item_detail">
@@ -238,7 +238,7 @@ export default {
     this.getTeamInfo()
   },
   methods: {
-    ...mapActions(['PUT_EDIT_TEAM_NAME', 'PUT_TEAM_EDIT', 'POST_TEAM_ADD', 'GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO']),
+    ...mapActions(['PUT_EDIT_TEAM_NAME', 'PUT_TEAM_EDIT', 'POST_TEAM_ADD', 'GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO', 'POST_DISMISS_TEAM']),
     async getTeamInfo () {
       const res = await this.GET_MY_TEAM_INFO()
       if (res.result === '0' && res.data) {
@@ -337,8 +337,9 @@ export default {
       this.form = JSON.parse(JSON.stringify(item))
     },
     // 解散队伍
-    dissolution () {
-      //
+    async dissolution () {
+      const res = await this.POST_DISMISS_TEAM({ teamId: this.teamInfo.teamId })
+      console.log(res)
     },
     // 添加队员
     addTeam () {
@@ -399,6 +400,7 @@ export default {
               if (res.result === '0' && res.data) {
                 this.dialogFormVisible = false
                 this.$message.success('编辑队员成功')
+                this.getTeamInfo()
               } else {
                 this.$message.error('编辑队员失败')
               }

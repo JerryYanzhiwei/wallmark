@@ -106,15 +106,15 @@
         </div>
       </div>
     </div>
-    <!-- <PublicTitle color="#333" title="作品列表" />
-    <div class="work_list">
+    <PublicTitle v-if="teamInfo && teamInfo.attachments" color="#333" title="作品列表" />
+    <div v-if="teamInfo && teamInfo.attachments" class="work_list">
       <div v-for="(item, index) in teamInfo.attachments" :key="index">
         {{
           item.attachmentFileName
         }}
         <i @click="downLoad(item)" class="iconfont icon-xiazai1"></i>
       </div>
-    </div> -->
+    </div>
   </div>
 </template>
 
@@ -134,7 +134,7 @@ export default {
     this.getTeamInfo()
   },
   methods: {
-    ...mapActions(['GET_TEAM_INFO']),
+    ...mapActions(['GET_TEAM_INFO', 'GET_DOWNLOAD_FILE']),
     async getTeamInfo () {
       const res = await this.GET_TEAM_INFO()
       console.log(res)
@@ -146,7 +146,7 @@ export default {
       this.$router.push('/main/createTeam')
     },
     async downLoad (file) {
-      window.open(`http://47.103.28.48:8080/match-service/user/teamInfo/dowload/attachment?attachmentId=${file.attachmentId}`)
+      this.GET_DOWNLOAD_FILE(file.attachmentId)
     }
   }
 }

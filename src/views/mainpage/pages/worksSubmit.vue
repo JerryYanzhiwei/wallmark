@@ -112,7 +112,7 @@ export default {
     this.getData()
   },
   methods: {
-    ...mapActions(['POST_FILE_UPLOAD', 'GET_TEAM_FILE', 'GET_DOWNLOAD_FILE']),
+    ...mapActions(['POST_FILE_UPLOAD', 'GET_MY_TEAM_INFO', 'GET_DOWNLOAD_FILE']),
     clickUploadBtn (type) {
       console.log('上传类型', type)
       const ref = `file${type}`
@@ -190,10 +190,10 @@ export default {
     // 查页面数据
     async getData () {
       try {
-        const res = await this.GET_TEAM_FILE()
+        const res = await this.GET_MY_TEAM_INFO()
         if (res.result === '0' && res.data) {
           console.log(res.data)
-          const process = res.data.teamProgress
+          const process = res.data.progress
           process === 0 && (this.processTxt = '初选')
           process === 1 && (this.processTxt = '半决赛')
           process === 2 && (this.processTxt = '决赛')
@@ -290,7 +290,7 @@ export default {
             margin-left: 20px;
             cursor: pointer;
             font-size: 20px;
-            color: #fff;
+            color: #333;
           }
         }
       }

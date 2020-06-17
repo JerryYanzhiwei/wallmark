@@ -28,52 +28,14 @@
         <el-button @click="editUserInfo" size="mini">修改</el-button>
       </div>
     </div>
-    <!-- <PublicTitle title="赛题详情下载"/>
+    <PublicTitle title="资料包下载"/>
     <div class="user_contain ops_contain">
       <p>
-        包装类课题介绍
+        资料包下载
         <i class="iconfont icon-xiazai1 download_btn"
                 @click="download(0)"></i>
       </p>
-      <p>
-        物流类课题介绍
-        <i class="iconfont icon-xiazai1 download_btn"
-                @click="download(1)"></i>
-      </p>
     </div>
-    <PublicTitle title="相关赛事文件下载"/>
-    <div class="user_contain ops_contain">
-      <p>
-        2020顺丰杯物流创新大赛大咖公开课内容提纲-包装
-        <i class="iconfont icon-xiazai1 download_btn"
-                @click="openModel(2)"></i>
-      </p>
-      <p>
-        2020顺丰杯物流创新大赛大咖公开课内容提纲-仓储
-        <i class="iconfont icon-xiazai1 download_btn"
-                @click="openModel(3)"></i>
-      </p>
-      <p>
-        2020顺丰杯物流创新大赛大咖公开课内容提纲-营运
-        <i class="iconfont icon-xiazai1 download_btn"
-                @click="openModel(4)"></i>
-      </p>
-      <p>
-        2020顺丰杯物流创新大赛赛事资料——航空
-        <i class="iconfont icon-xiazai1 download_btn"
-                @click="openModel(5)"></i>
-      </p>
-    </div>
-    <el-dialog
-      title="提示"
-      :visible.sync="dialogVisible"
-      width="30%">
-      <p class="tip_txt">该资料仅适用于2020“顺丰杯”物流创新大赛，未经主办方允许，资料内容不得向任何第三方披露，如不严谨保密，一经发现，主办方将保留法律诉讼权利！</p>
-      <el-checkbox v-model="checked">我已阅读并同意以上条款</el-checkbox>
-      <span slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="modelDown">确 定</el-button>
-      </span>
-    </el-dialog> -->
   </div>
 </template>
 
@@ -123,9 +85,9 @@ export default {
     //   this.dialogVisible = true
     // },
     // // 下载附件
-    // async download (attachmentId) {
-    //   this.GET_DOWNLOAD_TEMPLATE(attachmentId)
-    // },
+    async download (attachmentId) {
+      this.GET_DOWNLOAD_TEMPLATE(attachmentId)
+    },
     async editUserInfo () {
       const params = this.userForm
       const res = await this.PUT_USER_INFO(params)

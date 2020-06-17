@@ -128,6 +128,11 @@ export default new Vuex.Store({
       const { data: res } = await axios.put(`/user/teamInfo/remove?teamMemberId=${data.teamMemberId}&teamId=${data.teamId}`)
       return res
     },
+    // 队长解散队伍
+    async POST_DISMISS_TEAM ({ commit }, params) {
+      const { data: res } = await axios.post(`/user/dismiss?teamId=${params.teamId}`)
+      return res
+    },
     /**
      * 作品方向
      */
