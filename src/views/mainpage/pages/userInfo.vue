@@ -20,7 +20,7 @@
           <el-input v-model="userForm.school" size="mini"></el-input>
         </div>
         <div>
-          <span>学历: </span>
+          <span>专业: </span>
           <el-input v-model="userForm.profession" size="mini"></el-input>
         </div>
       </div>

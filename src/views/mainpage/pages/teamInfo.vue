@@ -339,7 +339,10 @@ export default {
     // 解散队伍
     async dissolution () {
       const res = await this.POST_DISMISS_TEAM({ teamId: this.teamInfo.teamId })
-      console.log(res)
+      if (res.result === '0' && res.data) {
+        this.$message.success('解散成功')
+        this.$router.push('userInfo')
+      }
     },
     // 添加队员
     addTeam () {
