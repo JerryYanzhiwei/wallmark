@@ -64,7 +64,7 @@
             </el-select>
           </el-form-item>
         </div>
-        <div v-if="formData.teamMembers.length < 5" @click="addMember" class="member_item add_member">
+        <div v-if="formData.teamMembers.length < 4" @click="addMember" class="member_item add_member">
           <i class="el-icon-plus"></i>
           <p>添加队员</p>
         </div>
