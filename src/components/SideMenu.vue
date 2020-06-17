@@ -33,7 +33,7 @@ export default {
         {
           path: '/main/teamDetail',
           title: '队伍中心',
-          flag: true
+          flag: !this.userInfo.captainFlag
         },
         {
           path: '/main/teamInfo',
