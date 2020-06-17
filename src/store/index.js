@@ -89,6 +89,11 @@ export default new Vuex.Store({
       const { data: res } = await axios.put('/user/teamMemberInfo?accountId=' + data.accountId, data.params)
       return res
     },
+    // 队长编辑队伍名称
+    async PUT_EDIT_TEAM_NAME ({ commit }, data = {}) {
+      const { data: res } = await axios.put('/user/teamInfo?teamId=' + data.teamId + '&teamName=' + data.teamName)
+      return res
+    },
     /**
      * 团队管理信息
      */

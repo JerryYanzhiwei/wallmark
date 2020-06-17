@@ -15,8 +15,8 @@
         </div>
         <div class="item">
           <span class="item_name">队长: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.captain" placement="top-start">
-            <span class="item_detail">{{teamInfo.captain}}</span>
+          <el-tooltip class="item" effect="dark" :content="teamInfo.captainName" placement="top-start">
+            <span class="item_detail">{{teamInfo.captainName}}</span>
           </el-tooltip>
         </div>
         <div class="item">
@@ -47,6 +47,12 @@
           <span class="item_name">电话: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.captainPhone" placement="top-start">
             <span class="item_detail">{{teamInfo.captainPhone}}</span>
+          </el-tooltip>
+        </div>
+        <div class="item">
+          <span class="item_name">进度: </span>
+          <el-tooltip class="item" effect="dark" :content="teamInfo.captainPhone" placement="top-start">
+            <span class="item_detail">{{getProgress(teamInfo.progress)}}</span>
           </el-tooltip>
         </div>
         <!-- <div class="item">
@@ -87,7 +93,7 @@
         </div> -->
         <div class="item">
           <el-button size="mini"
-            @click="editTeamInfo(teamInfo.teamNo)"
+            @click="editTeamName(teamInfo.teamNo)"
             >{{
               !canEdit ? '编辑信息' : '保存'
             }}</el-button>
@@ -121,7 +127,7 @@
           </p>
           <p class="item_detail">
             <span class="title">专业: </span>
-            <span class="detail">{{item.grade}}</span>
+            <span class="detail"> {{filterDegree(item.degree)}}</span>
           </p>
         </div>
         <div class="btn_contain">
@@ -133,7 +139,7 @@
 
     <!-- 弹层 -->
     <el-dialog :title="isAdd ? '添加队员':'编辑队员'" :visible.sync="dialogFormVisible">
-      <el-form :model="form" label-width="80px">
+      <el-form :model="form" ref="addForm" label-width="80px">
         <el-form-item label="姓名"
           prop="username"
           :rules="{
@@ -232,7 +238,7 @@ export default {
     this.getTeamInfo()
   },
   methods: {
-    ...mapActions(['PUT_TEAM_EDIT', 'POST_TEAM_ADD', 'GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO']),
+    ...mapActions(['PUT_EDIT_TEAM_NAME', 'PUT_TEAM_EDIT', 'POST_TEAM_ADD', 'GET_MY_TEAM_INFO', 'PUT_REMOVE_MEMBER', 'PUT_TEAM_COMPLETE', 'PUT_MY_TEAM_INFO']),
     async getTeamInfo () {
       const res = await this.GET_MY_TEAM_INFO()
       if (res.result === '0' && res.data) {
@@ -296,6 +302,33 @@ export default {
       })
       console.log(res)
     },
+    // 编辑队伍名称
+    async editTeamName () {
+      if (!this.canEdit) {
+        this.canEdit = !this.canEdit
+        return
+      }
+      if (!this.teamInfo.teamName) {
+        this.$message.error('请填写队伍名称')
+        return
+      }
+      try {
+        const params = {
+          teamId: this.teamInfo.teamId,
+          teamName: this.teamInfo.teamName
+        }
+        const res = await this.PUT_EDIT_TEAM_NAME(params)
+        if (res.result === '0' && res.data) {
+          this.$message.success('修改成功')
+          this.canEdit = false
+        } else {
+          this.$message.error('修改失败')
+        }
+      } catch (e) {
+        this.$message.error('修改失败')
+        console.lg(e)
+      }
+    },
     // 编辑队员
     editMember (item) {
       this.form = {}
@@ -315,45 +348,88 @@ export default {
     },
     // 编辑或者新增队员
     async submit () {
-      this.dialogFormVisible = false
-      if (this.isAdd) {
-        // 新增
-        try {
-          const list = []
-          list.push(this.form)
-          const params = {
-            teamId: this.teamInfo.teamId,
-            teamMembers: list
+      this.$refs.addForm.validate(async (valid) => {
+        if (valid) {
+          if (!this.validatePhone(this.form.phone)) {
+            this.$message.error('请输入正确的手机号码')
+            return
           }
-          console.log(params)
-          const res = await this.POST_TEAM_ADD(params)
-          console.log(res)
-          // 查询
-          this.getTeamInfo()
-        } catch (e) {
-          console.log(e)
+          if (!this.validateEmail(this.form.email)) {
+            this.$message.error('请输入正确的邮箱')
+            return
+          }
+          if (this.isAdd) {
+            // 新增
+            try {
+              const list = []
+              list.push(this.form)
+              const params = {
+                teamId: this.teamInfo.teamId,
+                teamMembers: list
+              }
+              console.log(params)
+              const res = await this.POST_TEAM_ADD(params)
+              if (res.result === '0' && res.data) {
+                this.dialogFormVisible = false
+                this.$message.success('新增队员成功')
+                this.getTeamInfo()
+              } else {
+                this.$message.error('新增队员失败')
+              }
+              // 查询
+            } catch (e) {
+              console.log(e)
+            }
+          } else {
+            // 编辑
+            try {
+              const obj = {
+                degree: this.form.degree,
+                email: this.form.email,
+                profession: this.form.profession,
+                school: this.form.school,
+                username: this.form.username
+              }
+              const params = {
+                accountId: this.form.accountId,
+                params: obj
+              }
+              console.log(params)
+              const res = await this.PUT_TEAM_EDIT(params)
+              if (res.result === '0' && res.data) {
+                this.dialogFormVisible = false
+                this.$message.success('编辑队员成功')
+              } else {
+                this.$message.error('编辑队员失败')
+              }
+            } catch (e) {
+              console.log(e)
+            }
+          }
         }
-      } else {
-        // 编辑
-        try {
-          const obj = {
-            degree: this.form.degree,
-            email: this.form.email,
-            profession: this.form.profession,
-            school: this.form.school,
-            username: this.form.username
-          }
-          const params = {
-            accountId: this.form.accountId,
-            params: obj
-          }
-          console.log(params)
-          const res = await this.PUT_TEAM_EDIT(params)
-          console.log(res)
-        } catch (e) {
-          console.log(e)
-        }
+      })
+    },
+    // 进度
+    getProgress (data) {
+      let value = ''
+      switch (data) {
+        case 0:
+          value = '组队中'
+          break
+        case 1:
+          value = '初赛'
+          break
+        case 2:
+          value = '复赛'
+          break
+        case 3:
+          value = '决赛'
+          break
+        case 4:
+          value = '淘汰'
+          break
       }
+      return value
     }
   }
 }

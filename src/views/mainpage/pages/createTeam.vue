@@ -138,13 +138,25 @@ export default {
     async createMyTeam (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
+          for (let i = 0; i < this.formData.teamMembers.length; i++) {
+            if (!this.validatePhone(this.formData.teamMembers[i].phone)) {
+              this.$message.error(`请输入队员${this.formData.teamMembers[i].username}正确的手机号码`)
+              return
+            }
+            if (!this.validateEmail(this.formData.teamMembers[i].email)) {
+              this.$message.error(`请输入队员${this.formData.teamMembers[i].username}正确的邮箱`)
+              return
+            }
+          }
           try {
             this.formData.teamName = this.teamName
             const res = await this.POST_CREATE_TEAM(this.formData)
             console.log(res)
             if (res.result === '0' && res.data) {
-              console.log('创建成功')
               this.$message.success('创建队伍成功')
+              this.$router.push('/main/teamDetail')
+            } else {
+              this.$message.error('创建队伍失败')
             }
           } catch (e) {
             console.log(e)
