@@ -603,6 +603,9 @@ export default {
 </style>
 
 <style lang="scss">
+  .el-select {
+    width: unset!important;
+  }
   .el-input {
     width: 230px;
   }
