@@ -71,6 +71,9 @@
       </div>
     </div> -->
     <PublicTitle color="#333" title="队伍成员" />
+    <div v-if="teamInfo" class="exit_team">
+      <el-button size="mini" @click="exitTeam">退出队伍</el-button>
+    </div>
     <div v-if="!teamInfo" class="no_data">
       <p>暂未加入任何队伍</p>
       <p @click="toCreate" class="create_team">快来创建队伍吧!</p>
@@ -134,7 +137,7 @@ export default {
     this.getTeamInfo()
   },
   methods: {
-    ...mapActions(['GET_TEAM_INFO', 'GET_DOWNLOAD_FILE']),
+    ...mapActions(['GET_TEAM_INFO', 'GET_DOWNLOAD_FILE', 'PUT_EXIT_TEAM']),
     async getTeamInfo () {
       const res = await this.GET_TEAM_INFO()
       console.log(res)
@@ -145,6 +148,12 @@ export default {
     toCreate () {
       this.$router.push('/main/createTeam')
     },
+    async exitTeam () {
+      const res = await this.PUT_EXIT_TEAM()
+      if (res.result === '0') {
+        this.$router.go(0)
+      }
+    },
     async downLoad (file) {
       this.GET_DOWNLOAD_FILE(file.attachmentId)
     }
@@ -154,6 +163,9 @@ export default {
 
 <style lang="scss" scoped>
   .team_info_container {
+    .exit_team {
+      text-align: right;
+    }
     .no_data {
       width: 100%;
       text-align: center;

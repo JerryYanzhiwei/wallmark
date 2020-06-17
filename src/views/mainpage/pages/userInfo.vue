@@ -16,6 +16,32 @@
           <el-input v-model="userForm.email" size="mini"></el-input>
         </div>
         <div>
+          <span>省份: </span>
+          <el-select
+            @change="changeProvince"
+            size="mini"
+            v-model="userForm.province"
+            placeholder="请选择省份">
+            <el-option
+              v-for="item in provinceData"
+              :key="item.value"
+              :label="item.labelZh"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <div>
+          <span>城市: </span>
+          <el-select size="mini" v-model="userForm.city" placeholder="请选择省份">
+            <el-option
+              v-for="item in getCityFromProvice(userForm.province)"
+              :key="item.value"
+              :label="item.labelZh"
+              :value="item.value">
+            </el-option>
+          </el-select>
+        </div>
+        <div>
           <span>学校: </span>
           <el-input v-model="userForm.school" size="mini"></el-input>
         </div>
@@ -41,6 +67,7 @@
 
 <script>
 import PublicTitle from '@/components/public_title.vue'
+import provinceData from '@/config/province.js'
 
 import { mapActions } from 'vuex'
 export default {
@@ -49,6 +76,7 @@ export default {
   },
   data () {
     return {
+      provinceData,
       userForm: {
         city: '',
         email: '',
@@ -84,12 +112,25 @@ export default {
     //   this.attachmentId = attachmentId
     //   this.dialogVisible = true
     // },
+    // 更改省份
+    changeProvince () {
+      this.userForm.city = ''
+    },
     // // 下载附件
     async download (attachmentId) {
       this.GET_DOWNLOAD_TEMPLATE(attachmentId)
     },
     async editUserInfo () {
       const params = this.userForm
+      let status = true
+      Object.keys(params).map(key => {
+        if (params[key] === '') {
+          console.log(key, params[key])
+          this.$message.error('请填写完整资料')
+          status = false
+        }
+      })
+      if (!status) return
       const res = await this.PUT_USER_INFO(params)
       if (res.result === '0' && res.data) {
         this.$message.success('修改成功')

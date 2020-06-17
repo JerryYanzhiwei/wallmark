@@ -74,6 +74,9 @@
       </div>
       <div class="leader_bottom">
         <div class="item">
+          <span>{{processTxt}}</span>
+        </div>
+        <div class="item">
           <el-button size="mini"
             @click="dissolution"
             >解散队伍</el-button>
@@ -214,6 +217,7 @@ export default {
   },
   data () {
     return {
+      processTxt: '',
       DegreeData,
       isAdd: false,
       form: {},
@@ -242,6 +246,12 @@ export default {
     async getTeamInfo () {
       const res = await this.GET_MY_TEAM_INFO()
       if (res.result === '0' && res.data) {
+        console.log(res.data)
+        const process = res.data.progress
+        process === 0 && (this.processTxt = '初选')
+        process === 1 && (this.processTxt = '半决赛')
+        process === 2 && (this.processTxt = '决赛')
+        process === 3 && (this.processTxt = '淘汰')
         this.teamInfo = res.data
       }
     },
@@ -342,6 +352,7 @@ export default {
       if (res.result === '0' && res.data) {
         this.$message.success('解散成功')
         this.$router.push('userInfo')
+        // location.href = location.origin + '/main/userInfo'
       }
     },
     // 添加队员

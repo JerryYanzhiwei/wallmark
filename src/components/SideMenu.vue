@@ -17,13 +17,22 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      userInfo: {}
+    }
+  },
+  watch: {
+    $route: async function (val) {
+      console.log(111)
+      await this.getUserInfo()
     }
   },
   computed: {
     menuData () {
+      console.log(this.userInfo, 123)
       return [
         {
           path: '/main/userInfo',
@@ -46,9 +55,19 @@ export default {
           flag: this.userInfo.captainFlag
         }
       ]
-    },
-    userInfo () {
-      return this.getUser()
+    }
+  },
+  created () {
+    this.getUserInfo()
+  },
+  methods: {
+    ...mapActions(['GET_USER_INFO']),
+    async getUserInfo () {
+      const res = await this.GET_USER_INFO()
+      if (res.result === '0' && res.data) {
+        this.userInfo = res.data
+        sessionStorage.setItem('userInfo', JSON.stringify(res.data))
+      }
     }
   }
 }

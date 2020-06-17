@@ -3,8 +3,14 @@ import degreeData from '@/config/degree.js'
 
 export default {
   methods: {
+    // 通过省份获取城市列表
+    getCityFromProvice (province) {
+      if (!province) return
+      const arr = jsonData.filter(item => item.value === province)
+      return arr[0].children
+    },
     filterDegree (degree) {
-      if (!degree) return
+      if (typeof degree !== 'number') return
       const arr = degreeData.filter((item) => item.value === degree)
       return arr[0].label
     },

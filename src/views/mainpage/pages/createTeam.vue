@@ -154,7 +154,7 @@ export default {
             console.log(res)
             if (res.result === '0' && res.data) {
               this.$message.success('创建队伍成功')
-              this.$router.push('/main/teamDetail')
+              this.$router.push('/main/userInfo')
             } else {
               this.$message.error('创建队伍失败')
             }
