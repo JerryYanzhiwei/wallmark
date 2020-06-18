@@ -419,40 +419,29 @@ export default {
             }
           } else {
             // 编辑
-            this.$confirm('是否要编辑队员信息？', '提示', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(async () => {
-              try {
-                const obj = {
-                  degree: this.form.degree,
-                  email: this.form.email,
-                  profession: this.form.profession,
-                  school: this.form.school,
-                  username: this.form.username
-                }
-                const params = {
-                  accountId: this.form.accountId,
-                  params: obj
-                }
-                const res = await this.PUT_TEAM_EDIT(params)
-                if (res.result === '0' && res.data) {
-                  this.dialogFormVisible = false
-                  this.$message.success('编辑队员成功')
-                  this.getTeamInfo()
-                } else {
-                  this.$message.error('编辑队员失败')
-                }
-              } catch (e) {
-                console.log(e)
+            try {
+              const obj = {
+                degree: this.form.degree,
+                email: this.form.email,
+                profession: this.form.profession,
+                school: this.form.school,
+                username: this.form.username
               }
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '已取消编辑'
-              })
-            })
+              const params = {
+                accountId: this.form.accountId,
+                params: obj
+              }
+              const res = await this.PUT_TEAM_EDIT(params)
+              if (res.result === '0' && res.data) {
+                this.dialogFormVisible = false
+                this.$message.success('编辑队员成功')
+                this.getTeamInfo()
+              } else {
+                this.$message.error('编辑队员失败')
+              }
+            } catch (e) {
+              console.log(e)
+            }
           }
         }
       })
