@@ -296,14 +296,25 @@ export default {
     },
     // 移除
     async removeMember (data) {
-      const res = await this.PUT_REMOVE_MEMBER({
-        teamMemberId: data.teamMemberId,
-        teamId: this.teamInfo.teamId
+      this.$confirm('是否移除此队员？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await this.PUT_REMOVE_MEMBER({
+          teamMemberId: data.teamMemberId,
+          teamId: this.teamInfo.teamId
+        })
+        if (res.result === '0' && res.data) {
+          this.$message.success('移除成功')
+          this.getTeamInfo()
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消移除'
+        })
       })
-      if (res.result === '0' && res.data) {
-        this.$message.success('移除成功')
-        this.getTeamInfo()
-      }
     },
     async editTeamStatus (status) {
       const res = await this.PUT_TEAM_COMPLETE({
@@ -348,12 +359,23 @@ export default {
     },
     // 解散队伍
     async dissolution () {
-      const res = await this.POST_DISMISS_TEAM({ teamId: this.teamInfo.teamId })
-      if (res.result === '0' && res.data) {
-        this.$message.success('解散成功')
-        this.$router.push('userInfo')
-        // location.href = location.origin + '/main/userInfo'
-      }
+      this.$confirm('此操作将永久解散队伍, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await this.POST_DISMISS_TEAM({ teamId: this.teamInfo.teamId })
+        if (res.result === '0' && res.data) {
+          this.$message.success('解散成功')
+          this.$router.push('userInfo')
+          // location.href = location.origin + '/main/userInfo'
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消解散队伍'
+        })
+      })
     },
     // 添加队员
     addTeam () {
@@ -397,30 +419,40 @@ export default {
             }
           } else {
             // 编辑
-            try {
-              const obj = {
-                degree: this.form.degree,
-                email: this.form.email,
-                profession: this.form.profession,
-                school: this.form.school,
-                username: this.form.username
+            this.$confirm('是否要编辑队员信息？', '提示', {
+              confirmButtonText: '确定',
+              cancelButtonText: '取消',
+              type: 'warning'
+            }).then(async () => {
+              try {
+                const obj = {
+                  degree: this.form.degree,
+                  email: this.form.email,
+                  profession: this.form.profession,
+                  school: this.form.school,
+                  username: this.form.username
+                }
+                const params = {
+                  accountId: this.form.accountId,
+                  params: obj
+                }
+                const res = await this.PUT_TEAM_EDIT(params)
+                if (res.result === '0' && res.data) {
+                  this.dialogFormVisible = false
+                  this.$message.success('编辑队员成功')
+                  this.getTeamInfo()
+                } else {
+                  this.$message.error('编辑队员失败')
+                }
+              } catch (e) {
+                console.log(e)
               }
-              const params = {
-                accountId: this.form.accountId,
-                params: obj
-              }
-              console.log(params)
-              const res = await this.PUT_TEAM_EDIT(params)
-              if (res.result === '0' && res.data) {
-                this.dialogFormVisible = false
-                this.$message.success('编辑队员成功')
-                this.getTeamInfo()
-              } else {
-                this.$message.error('编辑队员失败')
-              }
-            } catch (e) {
-              console.log(e)
-            }
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '已取消编辑'
+              })
+            })
           }
         }
       })
@@ -605,5 +637,8 @@ export default {
         }
       }
     }
+    // .el-message-box {
+    //   width: 420px !important;
+    // }
   }
 </style>

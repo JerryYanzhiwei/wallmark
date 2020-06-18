@@ -209,6 +209,14 @@ export default {
     vertical-align: top;
     margin: 0;
   }
+  .user_contain {
+    .el-select {
+      width: 50%!important;
+      .el-input {
+        width: 100%!important;
+      }
+    }
+  }
   .el-dialog__body {
     padding: 0 20px;
   }

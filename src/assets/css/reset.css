@@ -104,7 +104,7 @@ html, body, #app {
   border-right: none;
 }
 .el-message-box {
-  width: 100%;
+  /* width: 100%; */
 }
 
 input::-webkit-outer-spin-button,
