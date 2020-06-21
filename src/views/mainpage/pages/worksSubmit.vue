@@ -1,7 +1,7 @@
 <template>
   <!-- 作品提交 -->
   <div class="works_submit_container">
-    <PublicTitle title="作品提交"/>
+    <!-- <PublicTitle title="作品提交"/>
     <div class="submit_container">
       <div class="submit_item">
         <div class="submit_left flex_center">作品说明书</div>
@@ -16,7 +16,6 @@
               v-for="(item, index) in file"
               :key="index">
               <span>{{item.attachmentFileName}}</span>
-              <!-- <span @click="delFile('', index)" class="del_btn">x</span> -->
               <i class="iconfont icon-xiazai1 download_btn"
                 @click="download(item.attachmentId)"></i>
             </div>
@@ -43,7 +42,6 @@
               v-for="(item, index) in file1"
               :key="index">
               <span>{{item.attachmentFileName}}</span>
-              <!-- <span @click="delFile('1', index)" class="del_btn">x</span> -->
               <i class="iconfont icon-xiazai1 download_btn"
                 @click="download(item.attachmentId)"></i>
             </div>
@@ -53,7 +51,6 @@
         <div class="submit_right flex_center">
           <PublicButton @clickHandle="clickUploadBtn('1')">上传</PublicButton>
           <input type="file" v-show="false" :multiple="false" ref="file1" @change="fileChange1">
-          <!-- <i class="iconfont icon-lajitong"></i> -->
         </div>
       </div>
       <div class="submit_item">
@@ -67,7 +64,6 @@
               v-for="(item, index) in file2"
               :key="index">
               <span>{{item.attachmentFileName}}</span>
-              <!-- <span @click="delFile('2', index)" class="del_btn">x</span> -->
               <i class="iconfont icon-xiazai1 download_btn"
                 @click="download(item.attachmentId)"></i>
             </div>
@@ -79,11 +75,23 @@
           <input type="file" v-show="false" :multiple="true" ref="file2" @change="fileChange2">
         </div>
       </div>
-    </div>
+    </div> -->
     <PublicTitle title="作品进度"/>
     <div class="current_progress">
       <span class="progress">当前进度</span>
       <span class="bold process">{{processTxt}}</span>
+    </div>
+    <div class="work_submit">
+      <span>作品提交</span>
+      <PublicButton @clickHandle="clickUploadBtn('2')">上传</PublicButton>
+      <input type="file" v-show="false" :multiple="true" ref="file2" @change="fileChange2">
+    </div>
+    <div class="work_needing">
+      <p class="title">作品要求</p>
+      <p class="work_tips">作品文件名使用统一格式：“队伍名称+队长姓名+作品名称” </p>
+      <p class="work_tips">初赛：以PDF形式提交，字数不限。方案需包含以下所有部分：1)标题；2)目录；3)正文，其中包括①现状分析（需包括沃尔玛线上线下考察照片、调研数据及分析）、②方案目标、③设计方案；4)结语。</p>
+      <p class="work_tips">复赛：以PDF形式提交，字数不少于3000字。复赛现场进行PPT完整方案展示及现场答辩。方案需在初赛作品基础之上进行升华，增加①创新性、②商业价值说明、③可行性分析、④参赛队伍介绍。</p>
+      <p class="work_tips">决赛：以PDF形式提交。决赛现场进行PPT完整方案展示及现场答辩。方案需在复赛作品基础之上进行升华，增加①方案亮点。 </p>
     </div>
   </div>
 </template>
@@ -315,6 +323,27 @@ export default {
     }
     .process {
       margin-left: 10%;
+    }
+  }
+  .work_submit {
+    margin-top: 20px;
+    span {
+      font-size: 16px;
+      font-weight: bold;
+      margin-right: 10%;
+    }
+  }
+  .work_needing {
+    margin-top: 20px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+    .work_tips {
+      margin-top: 10px;
+
+      font-size: 14px;
+      font-weight: bold;
     }
   }
 }
