@@ -103,14 +103,6 @@ export default {
             school: '',
             profession: '',
             degree: ''
-          },
-          {
-            username: '',
-            phone: '',
-            email: '',
-            school: '',
-            profession: '',
-            degree: ''
           }
         ]
       }
