@@ -3,12 +3,6 @@
     <PublicTitle title="队伍信息" />
     <div v-if="teamInfo" class="leader_contain">
       <div class="leader_top">
-        <!-- <div class="item">
-          <span class="item_name">编号: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.teamNo" placement="top-start">
-            <span class="item_detail">{{teamInfo.teamNo}}</span>
-          </el-tooltip>
-        </div> -->
         <div class="item">
           <span class="item_name">队伍: </span>
           <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.teamName"></el-input>
@@ -19,72 +13,34 @@
             <span class="item_detail">{{teamInfo.captainName}}</span>
           </el-tooltip>
         </div>
-        <!-- <div class="item">
-          <span class="item_name">赛区: </span>
-          <el-tooltip class="item" effect="dark" :content="getZone(teamInfo.matchZone)" placement="top-start">
-            <span class="item_detail">{{getZone(teamInfo.matchZone)}}</span>
-          </el-tooltip>
-        </div> -->
-        <!-- <div class="item">
-          <span class="item_name">省份: </span>
-          <el-tooltip class="item" effect="dark" :content="getProvince(teamInfo.matchZone, teamInfo.province)" placement="top-start">
-            <span class="item_detail">{{getProvince(teamInfo.matchZone, teamInfo.province)}}</span>
-          </el-tooltip>
-        </div> -->
-        <!-- <div class="item">
-          <span class="item_name">方向: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.opusDirection" placement="top-start">
-            <span class="item_detail">{{teamInfo.opusDirection}}</span>
-          </el-tooltip>
-        </div>
-        <div class="item">
-          <span class="item_name">课题: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.subject" placement="top-start">
-            <span class="item_detail">{{teamInfo.subject}}</span>
-          </el-tooltip>
-        </div> -->
         <div class="item">
           <span class="item_name">电话: </span>
           <el-tooltip class="item" effect="dark" :content="teamInfo.captainPhone" placement="top-start">
             <span class="item_detail">{{teamInfo.captainPhone}}</span>
           </el-tooltip>
         </div>
-        <!-- <div class="item">
-          <span class="item_name">进度: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.captainPhone" placement="top-start">
-            <span class="item_detail">{{getProgress(teamInfo.progress)}}</span>
-          </el-tooltip>
-        </div> -->
-        <!-- <div class="item">
-          <span class="item_name">指导老师: </span>
-            <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.instructor"></el-input>
-        </div>
         <div class="item">
-          <span class="item_name">老师电话: </span>
-            <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.instructorPhone"></el-input>
+          <span class="item_name">状态: </span>
+          <span>{{processTxt}}</span>
         </div>
-        <div class="item">
-          <span class="item_name">团队介绍: </span>
-            <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.teamIntroduction"></el-input>
-        </div>
-        <div class="item">
-          <span class="item_name">招募需求: </span>
-            <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.recruitmentDemand"></el-input>
-        </div> -->
       </div>
       <div class="leader_bottom">
         <div class="item">
-          <span>{{processTxt}}</span>
-        </div>
-        <div class="item">
           <el-button size="mini"
-            @click="dissolution"
-            >解散队伍</el-button>
+            @click="editTeamName(teamInfo.teamNo)"
+            >{{
+              !canEdit ? '编辑信息' : '保存'
+            }}</el-button>
         </div>
         <div class="item">
           <el-button size="mini"
           @click="addTeam"
             >添加队员</el-button>
+        </div>
+        <div class="item">
+          <el-button size="mini"
+            @click="dissolution"
+            >解散队伍</el-button>
         </div>
         <!-- <div class="item">
           <el-button size="mini"
@@ -94,13 +50,6 @@
             teamInfo.teamState === 0 && '组队完成'
             }}</el-button>
         </div> -->
-        <div class="item">
-          <el-button size="mini"
-            @click="editTeamName(teamInfo.teamNo)"
-            >{{
-              !canEdit ? '编辑信息' : '保存'
-            }}</el-button>
-        </div>
       </div>
     </div>
     <PublicTitle title="队伍成员" />
@@ -198,9 +147,12 @@
           </el-select>
         </el-form-item>
       </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="dialogFormVisible = false">取 消</el-button>
-        <el-button type="primary" @click="submit">确 定</el-button>
+      <div class="dialog-footer">
+        <div class="email_tips">个人手机号修改请将修改内容发送邮件至XXX</div>
+        <div>
+          <el-button @click="dialogFormVisible = false">取 消</el-button>
+          <el-button type="primary" @click="submit">确 定</el-button>
+        </div>
       </div>
     </el-dialog>
   </div>
@@ -296,14 +248,25 @@ export default {
     },
     // 移除
     async removeMember (data) {
-      const res = await this.PUT_REMOVE_MEMBER({
-        teamMemberId: data.teamMemberId,
-        teamId: this.teamInfo.teamId
+      this.$confirm('是否移除此队员？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await this.PUT_REMOVE_MEMBER({
+          teamMemberId: data.teamMemberId,
+          teamId: this.teamInfo.teamId
+        })
+        if (res.result === '0' && res.data) {
+          this.$message.success('移除成功')
+          this.getTeamInfo()
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消移除'
+        })
       })
-      if (res.result === '0' && res.data) {
-        this.$message.success('移除成功')
-        this.getTeamInfo()
-      }
     },
     async editTeamStatus (status) {
       const res = await this.PUT_TEAM_COMPLETE({
@@ -348,12 +311,23 @@ export default {
     },
     // 解散队伍
     async dissolution () {
-      const res = await this.POST_DISMISS_TEAM({ teamId: this.teamInfo.teamId })
-      if (res.result === '0' && res.data) {
-        this.$message.success('解散成功')
-        this.$router.push('userInfo')
-        // location.href = location.origin + '/main/userInfo'
-      }
+      this.$confirm('此操作将永久解散队伍, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await this.POST_DISMISS_TEAM({ teamId: this.teamInfo.teamId })
+        if (res.result === '0' && res.data) {
+          this.$message.success('解散成功')
+          this.$router.push('userInfo')
+          // location.href = location.origin + '/main/userInfo'
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消解散队伍'
+        })
+      })
     },
     // 添加队员
     addTeam () {
@@ -409,7 +383,6 @@ export default {
                 accountId: this.form.accountId,
                 params: obj
               }
-              console.log(params)
               const res = await this.PUT_TEAM_EDIT(params)
               if (res.result === '0' && res.data) {
                 this.dialogFormVisible = false
@@ -457,6 +430,10 @@ export default {
       font-size: 13px;
     }
     .leader_contain {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
       margin-top: 20px;
       margin-bottom: 50px;
       padding: 20px 0;
@@ -474,7 +451,7 @@ export default {
         padding: 0 30px;
 
         .item {
-          width: 33%;
+          width: 50%;
           margin-top: 10px;
           font-size: 16px;
 
@@ -498,13 +475,19 @@ export default {
         }
       }
       .leader_bottom {
-        display: flex;
-        justify-content: space-around;
+        // display: flex;
+        // justify-content: space-around;
+        // flex-wrap: wrap;
 
         padding: 20px 30px;
         padding-bottom: 0;
         .item {
+          width: 50%;
           font-size: 16px;
+          margin-top: 10px;
+          &:first-child {
+            margin-top: 0;
+          }
           .item_name {
             display: inline-block;
 
@@ -583,6 +566,16 @@ export default {
         }
       }
     }
+    .dialog-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 20px;
+      .email_tips {
+        width: 60%;
+        color: #dc1e32;
+      }
+    }
   }
 </style>
 
@@ -605,5 +598,8 @@ export default {
         }
       }
     }
+    // .el-message-box {
+    //   width: 420px !important;
+    // }
   }
 </style>

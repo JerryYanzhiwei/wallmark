@@ -170,6 +170,10 @@
           </el-select>
         </div>
       </div>
+      <div class="agree_rules">
+        <el-checkbox v-model="checked">我已阅读并同意 <span>《个人信息保护政策》
+</span> </el-checkbox>
+      </div>
       <div class="btn_contain">
         <el-button @click="submitRegistry" size="mini">注册</el-button>
       </div>
@@ -203,6 +207,7 @@ export default {
       DegreeData,
       cityData: '',
       bg,
+      checked: false,
       showCount: false,
       count: 0,
       timer: null,
@@ -398,6 +403,10 @@ export default {
             this.$message.error('请选择是否有意向加入沃尔玛')
             return
           }
+          if (!this.checked) {
+            this.$message.error('阅读并同意《个人信息保护政策》')
+            return
+          }
           this.postForm = new FormData()
           for (var key in this.registryForm) {
             this.postForm.append(key, this.registryForm[key])
@@ -577,6 +586,11 @@ export default {
       p {
         margin-bottom: 10px;
       }
+    }
+    .agree_rules {
+      padding-left: 40px;
+      margin-top: 15px;
+      color: #409eff;
     }
   }
   @media screen and (max-width: 500px) {

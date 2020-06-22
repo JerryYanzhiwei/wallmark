@@ -149,10 +149,21 @@ export default {
       this.$router.push('/main/createTeam')
     },
     async exitTeam () {
-      const res = await this.PUT_EXIT_TEAM()
-      if (res.result === '0') {
-        this.$router.go(0)
-      }
+      this.$confirm('是否确定退出队伍？', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const res = await this.PUT_EXIT_TEAM()
+        if (res.result === '0') {
+          this.$router.go(0)
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
     },
     async downLoad (file) {
       this.GET_DOWNLOAD_FILE(file.attachmentId)

@@ -5,7 +5,7 @@
       <div class="user_top">
         <div>
           <span>姓名: </span>
-          <el-input v-model="userForm.username" size="mini"></el-input>
+          <el-input :disabled="!isEdit" v-model="userForm.username" size="mini"></el-input>
         </div>
         <div>
           <span>手机: </span>
@@ -13,11 +13,12 @@
         </div>
         <div>
           <span>邮箱: </span>
-          <el-input v-model="userForm.email" size="mini"></el-input>
+          <el-input :disabled="!isEdit" v-model="userForm.email" size="mini"></el-input>
         </div>
         <div>
           <span>省份: </span>
           <el-select
+            :disabled="!isEdit"
             @change="changeProvince"
             size="mini"
             v-model="userForm.province"
@@ -32,7 +33,7 @@
         </div>
         <div>
           <span>城市: </span>
-          <el-select size="mini" v-model="userForm.city" placeholder="请选择省份">
+          <el-select :disabled="!isEdit" size="mini" v-model="userForm.city" placeholder="请选择省份">
             <el-option
               v-for="item in getCityFromProvice(userForm.province)"
               :key="item.value"
@@ -43,15 +44,16 @@
         </div>
         <div>
           <span>学校: </span>
-          <el-input v-model="userForm.school" size="mini"></el-input>
+          <el-input :disabled="!isEdit" v-model="userForm.school" size="mini"></el-input>
         </div>
         <div>
           <span>专业: </span>
-          <el-input v-model="userForm.profession" size="mini"></el-input>
+          <el-input :disabled="!isEdit" v-model="userForm.profession" size="mini"></el-input>
         </div>
       </div>
       <div class="btn_contain">
-        <el-button @click="editUserInfo" size="mini">修改</el-button>
+        <el-button v-if="isEdit" @click="editUserInfo" size="mini">保存</el-button>
+        <el-button v-if="!isEdit" @click="isEdit = true" size="mini">修改</el-button>
       </div>
     </div>
     <PublicTitle title="资料包下载"/>
@@ -59,9 +61,10 @@
       <p>
         资料包下载
         <i class="iconfont icon-xiazai1 download_btn"
-                @click="download(0)"></i>
+          @click="download(0)"></i>
       </p>
     </div>
+    <p class="tips">大赛平台问题、咨询, 请发送邮件至xxxxx</p>
   </div>
 </template>
 
@@ -76,6 +79,7 @@ export default {
   },
   data () {
     return {
+      isEdit: false,
       provinceData,
       userForm: {
         city: '',
@@ -134,6 +138,7 @@ export default {
       const res = await this.PUT_USER_INFO(params)
       if (res.result === '0' && res.data) {
         this.$message.success('修改成功')
+        this.isEdit = false
       }
       console.log(res)
     },
@@ -153,7 +158,9 @@ export default {
 .userInfo_container {
   width: 100%;
   min-height: 100vh;
-
+  .tips {
+    color: #dc1e32;
+  }
   // background-color: #f4f5f8;
   .user_contain {
     margin-top: 30px;
@@ -208,6 +215,14 @@ export default {
   .userInfo_container .user_contain .user_top div.el-textarea {
     vertical-align: top;
     margin: 0;
+  }
+  .user_contain {
+    .el-select {
+      width: 50%!important;
+      .el-input {
+        width: 100%!important;
+      }
+    }
   }
   .el-dialog__body {
     padding: 0 20px;

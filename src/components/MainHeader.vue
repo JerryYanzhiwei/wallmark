@@ -29,7 +29,7 @@ export default {
       this.$router.push('/')
     },
     toModule () {
-      this.$router.push('/moduleSelect')
+      // this.$router.push('/moduleSelect')
     }
   }
 }
@@ -46,7 +46,6 @@ export default {
     color: #fff;
     font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
     img {
       width: 50px;
       height: 50px;
