@@ -429,10 +429,13 @@ export default {
   .login_container{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 
     width: 100%;
     height: 100vh;
+    background-image: url('../../assets/logobj.png');
+    background-size: cover;
+    background-repeat: no-repeat;
     .reload {
       font-size: 12px;
       color: #409EFF;
@@ -441,6 +444,7 @@ export default {
     .login_content {
       width: 400px;
       padding: 20px;
+      margin-right:13%;
 
       border-radius: 8px;
       box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
@@ -495,6 +499,7 @@ export default {
     .registry_content {
       width: 400px;
       padding: 20px;
+      margin-right: 13%;
 
       background-color: #fff;
       border-radius: 8px;
@@ -601,6 +606,7 @@ export default {
     .login_container .registry_content {
       width: 100%;
       height: 100%;
+      margin-right: 0;
       box-shadow: unset;
       border-radius: 0;
     }
@@ -651,5 +657,29 @@ export default {
   }
   .el-form-item__error {
     display: none;
+  }
+  @media screen and (max-width: 500px) {
+    .login_container .registry_content {
+      .el-select {
+        width: 70% !important;
+        .el-input {
+          width: 100%;
+        }
+      }
+      .intention_contain {
+        .el-select {
+          width: 94% !important;
+        }
+      }
+    }
+    .registry_content .el-input--mini {
+      width: 70%;
+    }
+    .login_form_contain .el-form-item .get_code {
+      right: 8%;
+    }
+    .login_container .prize_contain .prize_items .prize_detail {
+      width: 40%;
+    }
   }
 </style>
