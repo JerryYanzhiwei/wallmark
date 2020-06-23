@@ -86,6 +86,17 @@
       <PublicButton @clickHandle="clickUploadBtn('2')">上传</PublicButton>
       <input type="file" v-show="false" :multiple="true" ref="file2" @change="fileChange2">
     </div>
+    <div class="work_list">
+      <p>队伍作品</p>
+      <div class="file_item"
+        v-for="(item, index) in file2"
+        :key="index">
+        <span>{{item.attachmentFileName}}</span>
+        <i class="iconfont icon-xiazai1 download_btn"
+          @click="download(item.attachmentId)"></i>
+      </div>
+      <span class="no_data" v-if="!file2.length">暂未上传作品</span>
+    </div>
     <div class="work_needing">
       <p class="title">作品要求</p>
       <p class="work_tips">作品文件名使用统一格式：“队伍名称+队长姓名+作品名称” </p>
@@ -331,6 +342,27 @@ export default {
       font-size: 16px;
       font-weight: bold;
       margin-right: 10%;
+    }
+  }
+  .work_list {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    p {
+      font-size: 16px;
+      font-weight: bold;
+      margin-right: 10%;
+    }
+    .file_item {
+      font-size: 14px;
+      i {
+        margin-left: 5px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+      .no_data {
+        font-size: 14px;
+      }
     }
   }
   .work_needing {

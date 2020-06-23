@@ -1,7 +1,7 @@
 <template>
   <el-menu class="side_menu_container"
     text-color="#80799e"
-    background-color="#003C72"
+    background-color="#0b2338"
     active-text-color="#fff"
     mode="vertical"
     :router="true"
