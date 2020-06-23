@@ -197,6 +197,7 @@ import { mapActions } from 'vuex'
 import bg from '@/assets/bg.png'
 import ProvinceData from '@/config/province.js'
 import DegreeData from '@/config/degree.js'
+
 export default {
   data () {
     return {
@@ -413,7 +414,15 @@ export default {
           }
           const res = await this.POST_REGISTRY(this.postForm)
           if (res.result === '0' && res.data) {
-            this.isLogin = true
+            if (this.deviceType === 2) {
+              this.$dialog.alert({
+                message: '您已成功注册, 创建队伍、加入队伍等更多功能请访问PC端。'
+              }).then(() => {
+                location.reload()
+              })
+            } else {
+              this.isLogin = true
+            }
           }
           console.log('通过', res)
         } else {
