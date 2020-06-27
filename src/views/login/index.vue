@@ -171,11 +171,14 @@
         </div>
       </div>
       <div class="agree_rules">
-        <el-checkbox v-model="checked">我已阅读并同意 <span>《个人信息保护政策》
+        <el-checkbox v-model="checked">我已阅读并同意 <span @click="toAgreement">《个人信息保护政策》
 </span> </el-checkbox>
       </div>
       <div class="btn_contain">
         <el-button @click="submitRegistry" size="mini">注册</el-button>
+      </div>
+      <div class="phone_tips" v-if="deviceType === 2">
+        报名成功后,请登录大赛网站walmart-bc.zhaopin.com,完成团队组建、作品提交等后续操作
       </div>
     </div>
     <!-- 抽奖 -->
@@ -301,6 +304,11 @@ export default {
   },
   methods: {
     ...mapActions(['login', 'POST_GET_CODE', 'POST_REGISTRY', 'LOGIN_CODE', 'CODE_LOGIN']),
+    // 跳转协议
+    toAgreement () {
+      this.$router.push('/agreement')
+      // console.log(location.origin + '/agreement')
+    },
     // 选择省份 根据省份过滤城市
     changeProvince (data) {
       this.registryForm.city = ''
@@ -416,7 +424,7 @@ export default {
           if (res.result === '0' && res.data) {
             if (this.deviceType === 2) {
               this.$dialog.alert({
-                message: '您已成功注册, 创建队伍、加入队伍等更多功能请访问PC端。'
+                message: '报名成功后,请登录大赛网站walmart-bc.zhaopin.com,完成团队组建、作品提交等后续操作'
               }).then(() => {
                 location.reload()
               })
@@ -509,6 +517,7 @@ export default {
       width: 400px;
       padding: 20px;
       margin-right: 13%;
+      margin-top: 10%;
 
       background-color: #fff;
       border-radius: 8px;
@@ -605,6 +614,17 @@ export default {
       padding-left: 40px;
       margin-top: 15px;
       color: #409eff;
+      span {
+        color: #dc1e32;
+      }
+    }
+    .phone_tips {
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      text-align: center;
+      font-size: 12px;
+      color: #333;
     }
   }
   @media screen and (max-width: 500px) {
@@ -616,6 +636,7 @@ export default {
       width: 100%;
       height: 100%;
       margin-right: 0;
+      margin-top: 0;
       box-shadow: unset;
       border-radius: 0;
     }

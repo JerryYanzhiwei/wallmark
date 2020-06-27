@@ -64,7 +64,8 @@
           @click="download(0)"></i>
       </p>
     </div>
-    <p class="tips">大赛平台问题、咨询, 请发送邮件至xxxxx</p>
+    <p class="tips">大赛平台问题、咨询, 请发送邮件至walmart-bc@group.zhaopin.com.cn
+</p>
   </div>
 </template>
 

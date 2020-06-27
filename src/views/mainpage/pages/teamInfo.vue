@@ -148,7 +148,8 @@
         </el-form-item>
       </el-form>
       <div class="dialog-footer">
-        <div class="email_tips">个人手机号修改请将修改内容发送邮件至XXX</div>
+        <div class="email_tips">个人手机号修改请将修改内容发送邮件至: <br>walmart-bc@group.zhaopin.com.cn
+</div>
         <div>
           <el-button @click="dialogFormVisible = false">取 消</el-button>
           <el-button type="primary" @click="submit">确 定</el-button>
