@@ -23,6 +23,10 @@
           <span class="item_name">状态: </span>
           <span>{{processTxt}}</span>
         </div>
+        <div class="item">
+          <span class="item_name">赛区: </span>
+          <span>{{getMatchZone(teamInfo.province)}}</span>
+        </div>
       </div>
       <div class="leader_bottom">
         <div class="item">

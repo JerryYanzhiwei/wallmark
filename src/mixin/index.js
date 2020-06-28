@@ -3,6 +3,12 @@ import degreeData from '@/config/degree.js'
 
 export default {
   methods: {
+    // 根据省份获取赛区
+    getMatchZone (code) {
+      if (!code) return
+      const arr = jsonData.filter((val) => code === val.value)
+      return arr[0].matchZone
+    },
     // 通过省份获取城市列表
     getCityFromProvice (province) {
       if (!province) return
