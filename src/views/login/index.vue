@@ -104,36 +104,6 @@
               >
             </el-input>
           </el-form-item>
-          <!-- 省份 -->
-          <el-form-item
-            prop="province"
-            label="省份">
-            <el-select
-              @change="changeProvince"
-              size="mini"
-              v-model="registryForm.province"
-              placeholder="请选择">
-              <el-option
-                v-for="item in ProvinceData"
-                :key="item.value"
-                :label="item.labelZh"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <!-- 城市 -->
-          <el-form-item
-            prop="city"
-            label="城市">
-            <el-select size="mini" v-model="registryForm.city" placeholder="请选择">
-              <el-option
-                v-for="item in cityData"
-                :key="item.value"
-                :label="item.labelZh"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
           <!-- 学历 -->
           <el-form-item
             prop="degree"
@@ -157,6 +127,37 @@
               >
             </el-input>
           </el-form-item>
+          <!-- 省份 -->
+          <el-form-item
+            prop="province"
+            label="学校所在省份">
+            <el-select
+              class="city_select"
+              @change="changeProvince"
+              size="mini"
+              v-model="registryForm.province"
+              placeholder="请选择">
+              <el-option
+                v-for="item in ProvinceData"
+                :key="item.value"
+                :label="item.labelZh"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 城市 -->
+          <el-form-item
+            prop="city"
+            label="学校所在城市">
+            <el-select class="city_select" size="mini" v-model="registryForm.city" placeholder="请选择">
+              <el-option
+                v-for="item in cityData"
+                :key="item.value"
+                :label="item.labelZh"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
         <div class="intention_contain">
           <p>是否对沃尔玛秋招/实习招募感兴趣？</p>
@@ -178,7 +179,7 @@
         <el-button @click="submitRegistry" size="mini">注册</el-button>
       </div>
       <div class="phone_tips" v-if="deviceType === 2">
-        报名成功后,请登录大赛网站walmart-bc.zhaopin.com,完成团队组建、作品提交等后续操作
+        报名成功后,请登录大赛网站 <a class="link_style" href="http://walmart-bc.zhaopin.com">walmart-bc.zhaopin.com</a> ,完成团队组建、作品提交等后续操作
       </div>
     </div>
     <!-- 抽奖 -->
@@ -444,6 +445,9 @@ export default {
 
 <style lang="scss" scoped>
   .login_container{
+    .link_style {
+      color: #409EFF;
+    }
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -644,7 +648,7 @@ export default {
       width: 70%;
     }
     .login_form_contain .el-form-item .get_code {
-      right: 6%;
+      right: 11%;
     }
     .login_container .prize_contain .prize_items .prize_detail {
       width: 40%;
@@ -666,7 +670,7 @@ export default {
   }
   .login_form_contain {
     .el-form-item__label {
-      width: 80px;
+      min-width: 80px;
     }
     .el-form-item {
       position: relative;
@@ -695,6 +699,9 @@ export default {
         .el-input {
           width: 100%;
         }
+      }
+      .city_select {
+        width: 60%!important;
       }
       .intention_contain {
         .el-select {
