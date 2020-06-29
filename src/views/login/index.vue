@@ -308,7 +308,6 @@ export default {
     // 跳转协议
     toAgreement () {
       this.$router.push('/agreement')
-      // console.log(location.origin + '/agreement')
     },
     // 选择省份 根据省份过滤城市
     changeProvince (data) {

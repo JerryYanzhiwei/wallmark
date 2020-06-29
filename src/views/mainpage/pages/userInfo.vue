@@ -64,8 +64,12 @@
           @click="download(0)"></i>
       </p>
     </div>
-    <p class="tips">大赛平台问题、咨询, 请发送邮件至walmart-bc@group.zhaopin.com.cn
-</p>
+    <p class="tips">大赛平台问题、咨询, 请发送邮件至walmart-bc@group.zhaopin.com.cn</p>
+    <p @click="toAgreement" class="tips default_color">点击查看
+      <span>
+        《2020沃尔玛未来零售创想大赛个人信息保护策略》
+      </span>
+    </p>
   </div>
 </template>
 
@@ -117,6 +121,10 @@ export default {
     //   this.attachmentId = attachmentId
     //   this.dialogVisible = true
     // },
+    // 跳转协议
+    toAgreement () {
+      this.$router.push('/agreement')
+    },
     // 更改省份
     changeProvince () {
       this.userForm.city = ''
@@ -161,6 +169,9 @@ export default {
   min-height: 100vh;
   .tips {
     color: #dc1e32;
+    &.default_color {
+      cursor: pointer;
+    }
   }
   // background-color: #f4f5f8;
   .user_contain {
