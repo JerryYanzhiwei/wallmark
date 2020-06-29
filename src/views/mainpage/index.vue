@@ -45,7 +45,7 @@ export default {
 .works_container {
   height: 100vh;
   .main_header {
-    background-color: $bg_color;
+    background-color: #005572;
   }
 }
 </style>

@@ -104,36 +104,6 @@
               >
             </el-input>
           </el-form-item>
-          <!-- 省份 -->
-          <el-form-item
-            prop="province"
-            label="省份">
-            <el-select
-              @change="changeProvince"
-              size="mini"
-              v-model="registryForm.province"
-              placeholder="请选择">
-              <el-option
-                v-for="item in ProvinceData"
-                :key="item.value"
-                :label="item.labelZh"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
-          <!-- 城市 -->
-          <el-form-item
-            prop="city"
-            label="城市">
-            <el-select size="mini" v-model="registryForm.city" placeholder="请选择">
-              <el-option
-                v-for="item in cityData"
-                :key="item.value"
-                :label="item.labelZh"
-                :value="item.value">
-              </el-option>
-            </el-select>
-          </el-form-item>
           <!-- 学历 -->
           <el-form-item
             prop="degree"
@@ -157,6 +127,37 @@
               >
             </el-input>
           </el-form-item>
+          <!-- 省份 -->
+          <el-form-item
+            prop="province"
+            label="学校所在省份">
+            <el-select
+              class="city_select"
+              @change="changeProvince"
+              size="mini"
+              v-model="registryForm.province"
+              placeholder="请选择">
+              <el-option
+                v-for="item in ProvinceData"
+                :key="item.value"
+                :label="item.labelZh"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <!-- 城市 -->
+          <el-form-item
+            prop="city"
+            label="学校所在城市">
+            <el-select class="city_select" size="mini" v-model="registryForm.city" placeholder="请选择">
+              <el-option
+                v-for="item in cityData"
+                :key="item.value"
+                :label="item.labelZh"
+                :value="item.value">
+              </el-option>
+            </el-select>
+          </el-form-item>
         </el-form>
         <div class="intention_contain">
           <p>是否对沃尔玛秋招/实习招募感兴趣？</p>
@@ -171,11 +172,14 @@
         </div>
       </div>
       <div class="agree_rules">
-        <el-checkbox v-model="checked">我已阅读并同意 <span>《个人信息保护政策》
+        <el-checkbox v-model="checked">我已阅读并同意 <span @click="toAgreement">《个人信息保护政策》
 </span> </el-checkbox>
       </div>
       <div class="btn_contain">
         <el-button @click="submitRegistry" size="mini">注册</el-button>
+      </div>
+      <div class="phone_tips" v-if="deviceType === 2">
+        报名成功后,请登录大赛网站 <a class="link_style" href="http://walmart-bc.zhaopin.com">walmart-bc.zhaopin.com</a> ,完成团队组建、作品提交等后续操作
       </div>
     </div>
     <!-- 抽奖 -->
@@ -197,6 +201,7 @@ import { mapActions } from 'vuex'
 import bg from '@/assets/bg.png'
 import ProvinceData from '@/config/province.js'
 import DegreeData from '@/config/degree.js'
+
 export default {
   data () {
     return {
@@ -300,6 +305,11 @@ export default {
   },
   methods: {
     ...mapActions(['login', 'POST_GET_CODE', 'POST_REGISTRY', 'LOGIN_CODE', 'CODE_LOGIN']),
+    // 跳转协议
+    toAgreement () {
+      this.$router.push('/agreement')
+      // console.log(location.origin + '/agreement')
+    },
     // 选择省份 根据省份过滤城市
     changeProvince (data) {
       this.registryForm.city = ''
@@ -413,7 +423,15 @@ export default {
           }
           const res = await this.POST_REGISTRY(this.postForm)
           if (res.result === '0' && res.data) {
-            this.isLogin = true
+            if (this.deviceType === 2) {
+              this.$dialog.alert({
+                message: '报名成功后,请登录大赛网站walmart-bc.zhaopin.com,完成团队组建、作品提交等后续操作'
+              }).then(() => {
+                location.reload()
+              })
+            } else {
+              this.isLogin = true
+            }
           }
           console.log('通过', res)
         } else {
@@ -427,12 +445,18 @@ export default {
 
 <style lang="scss" scoped>
   .login_container{
+    .link_style {
+      color: #409EFF;
+    }
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
 
     width: 100%;
     height: 100vh;
+    background-image: url('../../assets/logobj.png');
+    background-size: cover;
+    background-repeat: no-repeat;
     .reload {
       font-size: 12px;
       color: #409EFF;
@@ -441,6 +465,7 @@ export default {
     .login_content {
       width: 400px;
       padding: 20px;
+      margin-right:13%;
 
       border-radius: 8px;
       box-shadow:1px 2px 10px 0px rgba(0, 0, 0, 0.3);
@@ -495,6 +520,8 @@ export default {
     .registry_content {
       width: 400px;
       padding: 20px;
+      margin-right: 13%;
+      margin-top: 10%;
 
       background-color: #fff;
       border-radius: 8px;
@@ -591,6 +618,17 @@ export default {
       padding-left: 40px;
       margin-top: 15px;
       color: #409eff;
+      span {
+        color: #dc1e32;
+      }
+    }
+    .phone_tips {
+      margin-top: 10px;
+      margin-bottom: 10px;
+
+      text-align: center;
+      font-size: 12px;
+      color: #333;
     }
   }
   @media screen and (max-width: 500px) {
@@ -601,6 +639,8 @@ export default {
     .login_container .registry_content {
       width: 100%;
       height: 100%;
+      margin-right: 0;
+      margin-top: 0;
       box-shadow: unset;
       border-radius: 0;
     }
@@ -608,7 +648,7 @@ export default {
       width: 70%;
     }
     .login_form_contain .el-form-item .get_code {
-      right: 6%;
+      right: 11%;
     }
     .login_container .prize_contain .prize_items .prize_detail {
       width: 40%;
@@ -630,7 +670,7 @@ export default {
   }
   .login_form_contain {
     .el-form-item__label {
-      width: 80px;
+      min-width: 80px;
     }
     .el-form-item {
       position: relative;
@@ -651,5 +691,32 @@ export default {
   }
   .el-form-item__error {
     display: none;
+  }
+  @media screen and (max-width: 500px) {
+    .login_container .registry_content {
+      .el-select {
+        width: 70% !important;
+        .el-input {
+          width: 100%;
+        }
+      }
+      .city_select {
+        width: 60%!important;
+      }
+      .intention_contain {
+        .el-select {
+          width: 94% !important;
+        }
+      }
+    }
+    .registry_content .el-input--mini {
+      width: 70%;
+    }
+    .login_form_contain .el-form-item .get_code {
+      right: 8%;
+    }
+    .login_container .prize_contain .prize_items .prize_detail {
+      width: 40%;
+    }
   }
 </style>

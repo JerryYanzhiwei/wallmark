@@ -13,6 +13,7 @@ const applyList = () => import(/* webpackChunkName: "backend" */ '../views/mainp
 const teamCenter = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/teamCenter.vue')
 const teamDetail = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/teamDetail.vue')
 const createTeam = () => import(/* webpackChunkName: "backend" */ '../views/mainpage/pages/createTeam.vue')
+const agreement = () => import(/* webpackChunkName: "backend" */ '../views/login/agreement.vue')
 
 const routerPush = Router.prototype.push
 Router.prototype.push = function push (location) {
@@ -35,6 +36,11 @@ const routes = [
     path: '/moduleSelect',
     name: 'moduleSelect',
     component: moduleSelect
+  },
+  {
+    path: '/agreement',
+    name: 'agreement',
+    component: agreement
   },
   {
     path: '/main',

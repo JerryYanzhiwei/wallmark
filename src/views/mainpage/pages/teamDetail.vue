@@ -320,12 +320,16 @@ export default {
       justify-content: space-between;
       flex-wrap: wrap;
 
-      padding-top: 30px;
+      margin-top: 30px;
+
+      padding: 10px 20px;
+
+      box-shadow: 1px 2px 10px 0px rgba(0, 0, 0, 0.3);
+      border-radius: 4px;
       div {
         width: 33%;
-        margin-top: 10px;
 
-        text-align: center;
+        text-align: left;
         color: #dc1e32;
         font-weight: bold;
         .icon-xiazai1 {

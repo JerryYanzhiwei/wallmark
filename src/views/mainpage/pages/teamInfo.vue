@@ -23,6 +23,10 @@
           <span class="item_name">状态: </span>
           <span>{{processTxt}}</span>
         </div>
+        <div class="item">
+          <span class="item_name">赛区: </span>
+          <span>{{getMatchZone(teamInfo.province)}}</span>
+        </div>
       </div>
       <div class="leader_bottom">
         <div class="item">
@@ -74,11 +78,11 @@
             <span class="detail">{{item.school}}</span>
           </p>
           <p class="item_detail">
-            <span class="title">学历: </span>
+            <span class="title">专业: </span>
             <span class="detail">{{item.profession}}</span>
           </p>
           <p class="item_detail">
-            <span class="title">专业: </span>
+            <span class="title">学历: </span>
             <span class="detail"> {{filterDegree(item.degree)}}</span>
           </p>
         </div>
@@ -148,7 +152,9 @@
         </el-form-item>
       </el-form>
       <div class="dialog-footer">
-        <div class="email_tips">个人手机号修改请将修改内容发送邮件至XXX</div>
+        <div class="email_tips">
+          <!-- 个人手机号修改请将修改内容发送邮件至: <br>walmart-bc@group.zhaopin.com.cn -->
+      </div>
         <div>
           <el-button @click="dialogFormVisible = false">取 消</el-button>
           <el-button type="primary" @click="submit">确 定</el-button>
