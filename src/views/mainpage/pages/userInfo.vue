@@ -67,7 +67,7 @@
     <p class="tips">大赛平台问题、咨询, 请发送邮件至walmart-bc@group.zhaopin.com.cn</p>
     <p @click="toAgreement" class="tips default_color">点击查看
       <span>
-        《2020沃尔玛未来零售创想大赛个人信息保护策略》
+        《2020沃尔玛未来零售创想大赛个人信息保护政策》
       </span>
     </p>
   </div>
@@ -170,6 +170,7 @@ export default {
   .tips {
     color: #dc1e32;
     &.default_color {
+      margin-top: 5px;
       cursor: pointer;
     }
   }
