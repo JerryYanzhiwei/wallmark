@@ -424,7 +424,7 @@ export default {
           if (res.result === '0' && res.data) {
             if (this.deviceType === 2) {
               this.$dialog.alert({
-                message: '请登录大赛网站walmart-bc.zhaopin.com,完成团队组建、作品提交等后续操作'
+                message: '报名成功,请登录大赛网站walmart-bc.zhaopin.com,完成团队组建、作品提交等后续操作'
               }).then(() => {
                 location.reload()
               })
