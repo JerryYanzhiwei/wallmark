@@ -11841,7 +11841,7 @@ export default [
       "code": "1003",
       "children": [
         {
-          "value": "1000001",
+          "value": "1000003",
           "labelZh": "台湾"
         }
       ]
@@ -11853,7 +11853,7 @@ export default [
       "code": "1003",
       "children": [
         {
-          "value": "1000001",
+          "value": "1000004",
           "labelZh": "海外"
         }
       ]
