@@ -196,6 +196,548 @@ export default [
       "labelEn": "tianjin"
     },
     {
+      "value": "62",
+      "labelZh": "甘肃省",
+      "matchZone": "华西区",
+      "code": "1004",
+      "children": [
+        {
+          "value": "6201",
+          "labelZh": "兰州市",
+          "children": [
+            {
+              "value": "620102",
+              "labelZh": "城关区",
+              "labelEn": "chengguan"
+            },
+            {
+              "value": "620103",
+              "labelZh": "七里河区",
+              "labelEn": "Qilihe district"
+            },
+            {
+              "value": "620104",
+              "labelZh": "西固区",
+              "labelEn": "West solid area"
+            },
+            {
+              "value": "620105",
+              "labelZh": "安宁区",
+              "labelEn": "Anning district"
+            },
+            {
+              "value": "620111",
+              "labelZh": "红古区",
+              "labelEn": "Ancient red zone"
+            },
+            {
+              "value": "620121",
+              "labelZh": "永登县",
+              "labelEn": "Yongdeng county"
+            },
+            {
+              "value": "620122",
+              "labelZh": "皋兰县",
+              "labelEn": "gaolan"
+            },
+            {
+              "value": "620123",
+              "labelZh": "榆中县",
+              "labelEn": "Yuzhong county"
+            }
+          ],
+          "labelEn": "Lanzhou city"
+        },
+        {
+          "value": "6202",
+          "labelZh": "嘉峪关市",
+          "children": [
+            {
+              "value": "620201",
+              "labelZh": "市辖区",
+              "labelEn": "Municipal districts"
+            }
+          ],
+          "labelEn": "Jiayuguan city"
+        },
+        {
+          "value": "6203",
+          "labelZh": "金昌市",
+          "children": [
+            {
+              "value": "620302",
+              "labelZh": "金川区",
+              "labelEn": "Jinchuan district"
+            },
+            {
+              "value": "620321",
+              "labelZh": "永昌县",
+              "labelEn": "yongchang"
+            }
+          ],
+          "labelEn": "The singularity"
+        },
+        {
+          "value": "6204",
+          "labelZh": "白银市",
+          "children": [
+            {
+              "value": "620402",
+              "labelZh": "白银区",
+              "labelEn": "Silver district"
+            },
+            {
+              "value": "620403",
+              "labelZh": "平川区",
+              "labelEn": "Pingchuan district"
+            },
+            {
+              "value": "620421",
+              "labelZh": "靖远县",
+              "labelEn": "Jingyuan,"
+            },
+            {
+              "value": "620422",
+              "labelZh": "会宁县",
+              "labelEn": "huining"
+            },
+            {
+              "value": "620423",
+              "labelZh": "景泰县",
+              "labelEn": "Jingtai county"
+            }
+          ],
+          "labelEn": "baiyin"
+        },
+        {
+          "value": "6205",
+          "labelZh": "天水市",
+          "children": [
+            {
+              "value": "620502",
+              "labelZh": "秦州区",
+              "labelEn": "The qin state"
+            },
+            {
+              "value": "620503",
+              "labelZh": "麦积区",
+              "labelEn": "Wheat product area"
+            },
+            {
+              "value": "620521",
+              "labelZh": "清水县",
+              "labelEn": "Qingshui county"
+            },
+            {
+              "value": "620522",
+              "labelZh": "秦安县",
+              "labelEn": "qinan"
+            },
+            {
+              "value": "620523",
+              "labelZh": "甘谷县",
+              "labelEn": "GanGu county"
+            },
+            {
+              "value": "620524",
+              "labelZh": "武山县",
+              "labelEn": "WuShan County"
+            },
+            {
+              "value": "620525",
+              "labelZh": "张家川回族自治县",
+              "labelEn": "Zhangjiachuan hui autonomous county"
+            }
+          ],
+          "labelEn": "tianshui"
+        },
+        {
+          "value": "6206",
+          "labelZh": "武威市",
+          "children": [
+            {
+              "value": "620602",
+              "labelZh": "凉州区",
+              "labelEn": "Liangzhou district"
+            },
+            {
+              "value": "620621",
+              "labelZh": "民勤县",
+              "labelEn": "Minqin county"
+            },
+            {
+              "value": "620622",
+              "labelZh": "古浪县",
+              "labelEn": "gulang"
+            },
+            {
+              "value": "620623",
+              "labelZh": "天祝藏族自治县",
+              "labelEn": "Tianzhu Tibetan autonomous county"
+            }
+          ],
+          "labelEn": "wuwei"
+        },
+        {
+          "value": "6207",
+          "labelZh": "张掖市",
+          "children": [
+            {
+              "value": "620702",
+              "labelZh": "甘州区",
+              "labelEn": "Ganzhou district"
+            },
+            {
+              "value": "620721",
+              "labelZh": "肃南裕固族自治县",
+              "labelEn": "Sunan yugur autonomous county"
+            },
+            {
+              "value": "620722",
+              "labelZh": "民乐县",
+              "labelEn": "Minle county"
+            },
+            {
+              "value": "620723",
+              "labelZh": "临泽县",
+              "labelEn": "Linze county"
+            },
+            {
+              "value": "620724",
+              "labelZh": "高台县",
+              "labelEn": "Gaotai county"
+            },
+            {
+              "value": "620725",
+              "labelZh": "山丹县",
+              "labelEn": "Shandan county"
+            }
+          ],
+          "labelEn": "zhangye"
+        },
+        {
+          "value": "6208",
+          "labelZh": "平凉市",
+          "children": [
+            {
+              "value": "620802",
+              "labelZh": "崆峒区",
+              "labelEn": "Kongdong area"
+            },
+            {
+              "value": "620821",
+              "labelZh": "泾川县",
+              "labelEn": "jingchuan"
+            },
+            {
+              "value": "620822",
+              "labelZh": "灵台县",
+              "labelEn": "Gv 10 county"
+            },
+            {
+              "value": "620823",
+              "labelZh": "崇信县",
+              "labelEn": "Believed in the county"
+            },
+            {
+              "value": "620824",
+              "labelZh": "华亭县",
+              "labelEn": "Huating county"
+            },
+            {
+              "value": "620825",
+              "labelZh": "庄浪县",
+              "labelEn": "Zhuanglang county"
+            },
+            {
+              "value": "620826",
+              "labelZh": "静宁县",
+              "labelEn": "Jingning county"
+            }
+          ],
+          "labelEn": "Pingliang city"
+        },
+        {
+          "value": "6209",
+          "labelZh": "酒泉市",
+          "children": [
+            {
+              "value": "620902",
+              "labelZh": "肃州区",
+              "labelEn": "The 'state"
+            },
+            {
+              "value": "620921",
+              "labelZh": "金塔县",
+              "labelEn": "Jinta county"
+            },
+            {
+              "value": "620922",
+              "labelZh": "瓜州县",
+              "labelEn": "Melon counties"
+            },
+            {
+              "value": "620923",
+              "labelZh": "肃北蒙古族自治县",
+              "labelEn": "Subei Mongolian autonomous county"
+            },
+            {
+              "value": "620924",
+              "labelZh": "阿克塞哈萨克族自治县",
+              "labelEn": "Aksai kazak autonomous county"
+            },
+            {
+              "value": "620981",
+              "labelZh": "玉门市",
+              "labelEn": "In yumen district"
+            },
+            {
+              "value": "620982",
+              "labelZh": "敦煌市",
+              "labelEn": "Dunhuang city"
+            }
+          ],
+          "labelEn": "Jiuquan city"
+        },
+        {
+          "value": "6210",
+          "labelZh": "庆阳市",
+          "children": [
+            {
+              "value": "621002",
+              "labelZh": "西峰区",
+              "labelEn": "Xifeng district"
+            },
+            {
+              "value": "621021",
+              "labelZh": "庆城县",
+              "labelEn": "Celebrates the city county"
+            },
+            {
+              "value": "621022",
+              "labelZh": "环县",
+              "labelEn": "Central county"
+            },
+            {
+              "value": "621023",
+              "labelZh": "华池县",
+              "labelEn": "huachi"
+            },
+            {
+              "value": "621024",
+              "labelZh": "合水县",
+              "labelEn": "heshui"
+            },
+            {
+              "value": "621025",
+              "labelZh": "正宁县",
+              "labelEn": "Zhengning county"
+            },
+            {
+              "value": "621026",
+              "labelZh": "宁县",
+              "labelEn": "Zhengning county"
+            },
+            {
+              "value": "621027",
+              "labelZh": "镇原县",
+              "labelEn": "zhenyuan"
+            }
+          ],
+          "labelEn": "Qingyang city"
+        },
+        {
+          "value": "6211",
+          "labelZh": "定西市",
+          "children": [
+            {
+              "value": "621102",
+              "labelZh": "安定区",
+              "labelEn": "Stability zone"
+            },
+            {
+              "value": "621121",
+              "labelZh": "通渭县",
+              "labelEn": "author"
+            },
+            {
+              "value": "621122",
+              "labelZh": "陇西县",
+              "labelEn": "Longxi county"
+            },
+            {
+              "value": "621123",
+              "labelZh": "渭源县",
+              "labelEn": "weiyuan"
+            },
+            {
+              "value": "621124",
+              "labelZh": "临洮县",
+              "labelEn": "lintao"
+            },
+            {
+              "value": "621125",
+              "labelZh": "漳县",
+              "labelEn": "Get a county"
+            },
+            {
+              "value": "621126",
+              "labelZh": "岷县",
+              "labelEn": "Min county"
+            }
+          ],
+          "labelEn": "Dingxi city"
+        },
+        {
+          "value": "6212",
+          "labelZh": "陇南市",
+          "children": [
+            {
+              "value": "621202",
+              "labelZh": "武都区",
+              "labelEn": "Wu all area"
+            },
+            {
+              "value": "621221",
+              "labelZh": "成县",
+              "labelEn": "Into the county"
+            },
+            {
+              "value": "621222",
+              "labelZh": "文县",
+              "labelEn": "Wenxian county"
+            },
+            {
+              "value": "621223",
+              "labelZh": "宕昌县",
+              "labelEn": "Dangchang county"
+            },
+            {
+              "value": "621224",
+              "labelZh": "康县",
+              "labelEn": "Kang county"
+            },
+            {
+              "value": "621225",
+              "labelZh": "西和县",
+              "labelEn": "Xihe county"
+            },
+            {
+              "value": "621226",
+              "labelZh": "礼县",
+              "labelEn": "Lixian county"
+            },
+            {
+              "value": "621227",
+              "labelZh": "徽县",
+              "labelEn": "Hui county"
+            },
+            {
+              "value": "621228",
+              "labelZh": "两当县",
+              "labelEn": "LiangDang county"
+            }
+          ],
+          "labelEn": "Longnan city"
+        },
+        {
+          "value": "6229",
+          "labelZh": "临夏回族自治州",
+          "children": [
+            {
+              "value": "622901",
+              "labelZh": "临夏市",
+              "labelEn": "Linxia city"
+            },
+            {
+              "value": "622921",
+              "labelZh": "临夏县",
+              "labelEn": "Linxia county"
+            },
+            {
+              "value": "622922",
+              "labelZh": "康乐县",
+              "labelEn": "kangle"
+            },
+            {
+              "value": "622923",
+              "labelZh": "永靖县",
+              "labelEn": "yongjing"
+            },
+            {
+              "value": "622924",
+              "labelZh": "广河县",
+              "labelEn": "Vitalizing national economy.it"
+            },
+            {
+              "value": "622925",
+              "labelZh": "和政县",
+              "labelEn": "hezheng"
+            },
+            {
+              "value": "622926",
+              "labelZh": "东乡族自治县",
+              "labelEn": "Dongxiang autonomous county"
+            },
+            {
+              "value": "622927",
+              "labelZh": "积石山保安族东乡族撒拉族自治县",
+              "labelEn": "Jishishan baoan dongxiang sala autonomous county"
+            }
+          ],
+          "labelEn": "Linxia hui autonomous prefecture"
+        },
+        {
+          "value": "6230",
+          "labelZh": "甘南藏族自治州",
+          "children": [
+            {
+              "value": "623001",
+              "labelZh": "合作市",
+              "labelEn": "Cooperation,"
+            },
+            {
+              "value": "623021",
+              "labelZh": "临潭县",
+              "labelEn": "In the tam county"
+            },
+            {
+              "value": "623022",
+              "labelZh": "卓尼县",
+              "labelEn": "zhuoni"
+            },
+            {
+              "value": "623023",
+              "labelZh": "舟曲县",
+              "labelEn": "zhouqu"
+            },
+            {
+              "value": "623024",
+              "labelZh": "迭部县",
+              "labelEn": "Overlapping of the county"
+            },
+            {
+              "value": "623025",
+              "labelZh": "玛曲县",
+              "labelEn": "Ma qu county"
+            },
+            {
+              "value": "623026",
+              "labelZh": "碌曲县",
+              "labelEn": "The importance qu county"
+            },
+            {
+              "value": "623027",
+              "labelZh": "夏河县",
+              "labelEn": "Town was"
+            }
+          ],
+          "labelEn": "Gannan Tibetan autonomous prefecture"
+        }
+      ],
+      "labelEn": "Gansu province"
+    },
+    {
       "value": "13",
       "labelZh": "河北省",
       "matchZone": "华北区",
@@ -15461,548 +16003,6 @@ export default [
         }
       ],
       "labelEn": "Shaanxi province"
-    },
-    {
-      "value": "62",
-      "labelZh": "甘肃省",
-      "matchZone": "华西区",
-      "code": "1004",
-      "children": [
-        {
-          "value": "6201",
-          "labelZh": "兰州市",
-          "children": [
-            {
-              "value": "620102",
-              "labelZh": "城关区",
-              "labelEn": "chengguan"
-            },
-            {
-              "value": "620103",
-              "labelZh": "七里河区",
-              "labelEn": "Qilihe district"
-            },
-            {
-              "value": "620104",
-              "labelZh": "西固区",
-              "labelEn": "West solid area"
-            },
-            {
-              "value": "620105",
-              "labelZh": "安宁区",
-              "labelEn": "Anning district"
-            },
-            {
-              "value": "620111",
-              "labelZh": "红古区",
-              "labelEn": "Ancient red zone"
-            },
-            {
-              "value": "620121",
-              "labelZh": "永登县",
-              "labelEn": "Yongdeng county"
-            },
-            {
-              "value": "620122",
-              "labelZh": "皋兰县",
-              "labelEn": "gaolan"
-            },
-            {
-              "value": "620123",
-              "labelZh": "榆中县",
-              "labelEn": "Yuzhong county"
-            }
-          ],
-          "labelEn": "Lanzhou city"
-        },
-        {
-          "value": "6202",
-          "labelZh": "嘉峪关市",
-          "children": [
-            {
-              "value": "620201",
-              "labelZh": "市辖区",
-              "labelEn": "Municipal districts"
-            }
-          ],
-          "labelEn": "Jiayuguan city"
-        },
-        {
-          "value": "6203",
-          "labelZh": "金昌市",
-          "children": [
-            {
-              "value": "620302",
-              "labelZh": "金川区",
-              "labelEn": "Jinchuan district"
-            },
-            {
-              "value": "620321",
-              "labelZh": "永昌县",
-              "labelEn": "yongchang"
-            }
-          ],
-          "labelEn": "The singularity"
-        },
-        {
-          "value": "6204",
-          "labelZh": "白银市",
-          "children": [
-            {
-              "value": "620402",
-              "labelZh": "白银区",
-              "labelEn": "Silver district"
-            },
-            {
-              "value": "620403",
-              "labelZh": "平川区",
-              "labelEn": "Pingchuan district"
-            },
-            {
-              "value": "620421",
-              "labelZh": "靖远县",
-              "labelEn": "Jingyuan,"
-            },
-            {
-              "value": "620422",
-              "labelZh": "会宁县",
-              "labelEn": "huining"
-            },
-            {
-              "value": "620423",
-              "labelZh": "景泰县",
-              "labelEn": "Jingtai county"
-            }
-          ],
-          "labelEn": "baiyin"
-        },
-        {
-          "value": "6205",
-          "labelZh": "天水市",
-          "children": [
-            {
-              "value": "620502",
-              "labelZh": "秦州区",
-              "labelEn": "The qin state"
-            },
-            {
-              "value": "620503",
-              "labelZh": "麦积区",
-              "labelEn": "Wheat product area"
-            },
-            {
-              "value": "620521",
-              "labelZh": "清水县",
-              "labelEn": "Qingshui county"
-            },
-            {
-              "value": "620522",
-              "labelZh": "秦安县",
-              "labelEn": "qinan"
-            },
-            {
-              "value": "620523",
-              "labelZh": "甘谷县",
-              "labelEn": "GanGu county"
-            },
-            {
-              "value": "620524",
-              "labelZh": "武山县",
-              "labelEn": "WuShan County"
-            },
-            {
-              "value": "620525",
-              "labelZh": "张家川回族自治县",
-              "labelEn": "Zhangjiachuan hui autonomous county"
-            }
-          ],
-          "labelEn": "tianshui"
-        },
-        {
-          "value": "6206",
-          "labelZh": "武威市",
-          "children": [
-            {
-              "value": "620602",
-              "labelZh": "凉州区",
-              "labelEn": "Liangzhou district"
-            },
-            {
-              "value": "620621",
-              "labelZh": "民勤县",
-              "labelEn": "Minqin county"
-            },
-            {
-              "value": "620622",
-              "labelZh": "古浪县",
-              "labelEn": "gulang"
-            },
-            {
-              "value": "620623",
-              "labelZh": "天祝藏族自治县",
-              "labelEn": "Tianzhu Tibetan autonomous county"
-            }
-          ],
-          "labelEn": "wuwei"
-        },
-        {
-          "value": "6207",
-          "labelZh": "张掖市",
-          "children": [
-            {
-              "value": "620702",
-              "labelZh": "甘州区",
-              "labelEn": "Ganzhou district"
-            },
-            {
-              "value": "620721",
-              "labelZh": "肃南裕固族自治县",
-              "labelEn": "Sunan yugur autonomous county"
-            },
-            {
-              "value": "620722",
-              "labelZh": "民乐县",
-              "labelEn": "Minle county"
-            },
-            {
-              "value": "620723",
-              "labelZh": "临泽县",
-              "labelEn": "Linze county"
-            },
-            {
-              "value": "620724",
-              "labelZh": "高台县",
-              "labelEn": "Gaotai county"
-            },
-            {
-              "value": "620725",
-              "labelZh": "山丹县",
-              "labelEn": "Shandan county"
-            }
-          ],
-          "labelEn": "zhangye"
-        },
-        {
-          "value": "6208",
-          "labelZh": "平凉市",
-          "children": [
-            {
-              "value": "620802",
-              "labelZh": "崆峒区",
-              "labelEn": "Kongdong area"
-            },
-            {
-              "value": "620821",
-              "labelZh": "泾川县",
-              "labelEn": "jingchuan"
-            },
-            {
-              "value": "620822",
-              "labelZh": "灵台县",
-              "labelEn": "Gv 10 county"
-            },
-            {
-              "value": "620823",
-              "labelZh": "崇信县",
-              "labelEn": "Believed in the county"
-            },
-            {
-              "value": "620824",
-              "labelZh": "华亭县",
-              "labelEn": "Huating county"
-            },
-            {
-              "value": "620825",
-              "labelZh": "庄浪县",
-              "labelEn": "Zhuanglang county"
-            },
-            {
-              "value": "620826",
-              "labelZh": "静宁县",
-              "labelEn": "Jingning county"
-            }
-          ],
-          "labelEn": "Pingliang city"
-        },
-        {
-          "value": "6209",
-          "labelZh": "酒泉市",
-          "children": [
-            {
-              "value": "620902",
-              "labelZh": "肃州区",
-              "labelEn": "The 'state"
-            },
-            {
-              "value": "620921",
-              "labelZh": "金塔县",
-              "labelEn": "Jinta county"
-            },
-            {
-              "value": "620922",
-              "labelZh": "瓜州县",
-              "labelEn": "Melon counties"
-            },
-            {
-              "value": "620923",
-              "labelZh": "肃北蒙古族自治县",
-              "labelEn": "Subei Mongolian autonomous county"
-            },
-            {
-              "value": "620924",
-              "labelZh": "阿克塞哈萨克族自治县",
-              "labelEn": "Aksai kazak autonomous county"
-            },
-            {
-              "value": "620981",
-              "labelZh": "玉门市",
-              "labelEn": "In yumen district"
-            },
-            {
-              "value": "620982",
-              "labelZh": "敦煌市",
-              "labelEn": "Dunhuang city"
-            }
-          ],
-          "labelEn": "Jiuquan city"
-        },
-        {
-          "value": "6210",
-          "labelZh": "庆阳市",
-          "children": [
-            {
-              "value": "621002",
-              "labelZh": "西峰区",
-              "labelEn": "Xifeng district"
-            },
-            {
-              "value": "621021",
-              "labelZh": "庆城县",
-              "labelEn": "Celebrates the city county"
-            },
-            {
-              "value": "621022",
-              "labelZh": "环县",
-              "labelEn": "Central county"
-            },
-            {
-              "value": "621023",
-              "labelZh": "华池县",
-              "labelEn": "huachi"
-            },
-            {
-              "value": "621024",
-              "labelZh": "合水县",
-              "labelEn": "heshui"
-            },
-            {
-              "value": "621025",
-              "labelZh": "正宁县",
-              "labelEn": "Zhengning county"
-            },
-            {
-              "value": "621026",
-              "labelZh": "宁县",
-              "labelEn": "Zhengning county"
-            },
-            {
-              "value": "621027",
-              "labelZh": "镇原县",
-              "labelEn": "zhenyuan"
-            }
-          ],
-          "labelEn": "Qingyang city"
-        },
-        {
-          "value": "6211",
-          "labelZh": "定西市",
-          "children": [
-            {
-              "value": "621102",
-              "labelZh": "安定区",
-              "labelEn": "Stability zone"
-            },
-            {
-              "value": "621121",
-              "labelZh": "通渭县",
-              "labelEn": "author"
-            },
-            {
-              "value": "621122",
-              "labelZh": "陇西县",
-              "labelEn": "Longxi county"
-            },
-            {
-              "value": "621123",
-              "labelZh": "渭源县",
-              "labelEn": "weiyuan"
-            },
-            {
-              "value": "621124",
-              "labelZh": "临洮县",
-              "labelEn": "lintao"
-            },
-            {
-              "value": "621125",
-              "labelZh": "漳县",
-              "labelEn": "Get a county"
-            },
-            {
-              "value": "621126",
-              "labelZh": "岷县",
-              "labelEn": "Min county"
-            }
-          ],
-          "labelEn": "Dingxi city"
-        },
-        {
-          "value": "6212",
-          "labelZh": "陇南市",
-          "children": [
-            {
-              "value": "621202",
-              "labelZh": "武都区",
-              "labelEn": "Wu all area"
-            },
-            {
-              "value": "621221",
-              "labelZh": "成县",
-              "labelEn": "Into the county"
-            },
-            {
-              "value": "621222",
-              "labelZh": "文县",
-              "labelEn": "Wenxian county"
-            },
-            {
-              "value": "621223",
-              "labelZh": "宕昌县",
-              "labelEn": "Dangchang county"
-            },
-            {
-              "value": "621224",
-              "labelZh": "康县",
-              "labelEn": "Kang county"
-            },
-            {
-              "value": "621225",
-              "labelZh": "西和县",
-              "labelEn": "Xihe county"
-            },
-            {
-              "value": "621226",
-              "labelZh": "礼县",
-              "labelEn": "Lixian county"
-            },
-            {
-              "value": "621227",
-              "labelZh": "徽县",
-              "labelEn": "Hui county"
-            },
-            {
-              "value": "621228",
-              "labelZh": "两当县",
-              "labelEn": "LiangDang county"
-            }
-          ],
-          "labelEn": "Longnan city"
-        },
-        {
-          "value": "6229",
-          "labelZh": "临夏回族自治州",
-          "children": [
-            {
-              "value": "622901",
-              "labelZh": "临夏市",
-              "labelEn": "Linxia city"
-            },
-            {
-              "value": "622921",
-              "labelZh": "临夏县",
-              "labelEn": "Linxia county"
-            },
-            {
-              "value": "622922",
-              "labelZh": "康乐县",
-              "labelEn": "kangle"
-            },
-            {
-              "value": "622923",
-              "labelZh": "永靖县",
-              "labelEn": "yongjing"
-            },
-            {
-              "value": "622924",
-              "labelZh": "广河县",
-              "labelEn": "Vitalizing national economy.it"
-            },
-            {
-              "value": "622925",
-              "labelZh": "和政县",
-              "labelEn": "hezheng"
-            },
-            {
-              "value": "622926",
-              "labelZh": "东乡族自治县",
-              "labelEn": "Dongxiang autonomous county"
-            },
-            {
-              "value": "622927",
-              "labelZh": "积石山保安族东乡族撒拉族自治县",
-              "labelEn": "Jishishan baoan dongxiang sala autonomous county"
-            }
-          ],
-          "labelEn": "Linxia hui autonomous prefecture"
-        },
-        {
-          "value": "6230",
-          "labelZh": "甘南藏族自治州",
-          "children": [
-            {
-              "value": "623001",
-              "labelZh": "合作市",
-              "labelEn": "Cooperation,"
-            },
-            {
-              "value": "623021",
-              "labelZh": "临潭县",
-              "labelEn": "In the tam county"
-            },
-            {
-              "value": "623022",
-              "labelZh": "卓尼县",
-              "labelEn": "zhuoni"
-            },
-            {
-              "value": "623023",
-              "labelZh": "舟曲县",
-              "labelEn": "zhouqu"
-            },
-            {
-              "value": "623024",
-              "labelZh": "迭部县",
-              "labelEn": "Overlapping of the county"
-            },
-            {
-              "value": "623025",
-              "labelZh": "玛曲县",
-              "labelEn": "Ma qu county"
-            },
-            {
-              "value": "623026",
-              "labelZh": "碌曲县",
-              "labelEn": "The importance qu county"
-            },
-            {
-              "value": "623027",
-              "labelZh": "夏河县",
-              "labelEn": "Town was"
-            }
-          ],
-          "labelEn": "Gannan Tibetan autonomous prefecture"
-        }
-      ],
-      "labelEn": "Gansu province"
     },
     {
       "value": "63",
