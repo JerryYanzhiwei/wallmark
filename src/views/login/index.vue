@@ -18,6 +18,8 @@
         <span v-else class="send_msg">{{loginCode}}</span>
       </div>
       <div class="btn_contain">
+        <!-- 隐藏登录 -->
+        <!-- <span @click="isLogin = false">注册</span> -->
         <span v-if="false" @click="isLogin = false">注册</span>
         <el-button v-if="!loginType" @click="passwordLogin">登录</el-button>
         <el-button v-if="loginType" @click="codeLogin">登录</el-button>
@@ -175,6 +177,8 @@
         <el-checkbox v-model="checked">我已阅读并同意 <span @click="toAgreement">《个人信息保护政策》
 </span> </el-checkbox>
       </div>
+      <!-- 隐藏注册 -->
+      <!-- <div class="btn_contain"> -->
       <div v-if="false" class="btn_contain">
         <el-button @click="submitRegistry" size="mini">注册</el-button>
       </div>

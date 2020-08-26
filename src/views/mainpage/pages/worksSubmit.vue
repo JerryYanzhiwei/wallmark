@@ -83,6 +83,7 @@
     </div>
     <div class="work_submit">
       <span>作品提交</span>
+      <!-- <PublicButton @clickHandle="clickUploadBtn('2')">上传</PublicButton> -->
       <PublicButton @clickHandle="dialogVisible = true">上传</PublicButton>
       <input type="file" v-show="false" :multiple="true" ref="file2" @change="fileChange2">
     </div>
@@ -140,7 +141,7 @@ export default {
     }
   },
   mounted () {
-    // this.getData()
+    this.getData()
   },
   methods: {
     ...mapActions(['POST_FILE_UPLOAD', 'GET_MY_TEAM_INFO', 'GET_DOWNLOAD_FILE']),
