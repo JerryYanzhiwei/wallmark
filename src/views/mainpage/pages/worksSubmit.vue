@@ -83,7 +83,7 @@
     </div>
     <div class="work_submit">
       <span>作品提交</span>
-      <PublicButton @clickHandle="clickUploadBtn('2')">上传</PublicButton>
+      <PublicButton @clickHandle="dialogVisible = true">上传</PublicButton>
       <input type="file" v-show="false" :multiple="true" ref="file2" @change="fileChange2">
     </div>
     <div class="work_list">
@@ -105,6 +105,16 @@
       <!-- <p class="work_tips">复赛：以PDF形式提交，字数不少于3000字。复赛现场进行PPT完整方案展示及现场答辩。方案需在初赛作品基础之上进行升华，增加①创新性、②商业价值说明、③可行性分析、④参赛队伍介绍。</p>
       <p class="work_tips">决赛：以PDF形式提交。决赛现场进行PPT完整方案展示及现场答辩。方案需在复赛作品基础之上进行升华，增加①方案亮点。 </p> -->
     </div>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose">
+      <span>初赛作品已进入全国统一筛选阶段，最终结果将会在9月11日公布，届时请关注沃尔玛大赛官网或沃尔玛招聘公众号留意相关信息。</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -119,6 +129,7 @@ export default {
   },
   data () {
     return {
+      dialogVisible: false,
       // 作品说明书
       file: [],
       // 作品介绍
@@ -129,15 +140,15 @@ export default {
     }
   },
   mounted () {
-    this.getData()
+    // this.getData()
   },
   methods: {
     ...mapActions(['POST_FILE_UPLOAD', 'GET_MY_TEAM_INFO', 'GET_DOWNLOAD_FILE']),
     clickUploadBtn (type) {
-      console.log('上传类型', type)
-      const ref = `file${type}`
-      const dom = this.$refs[ref]
-      dom && dom.click()
+      // console.log('上传类型', type)
+      // const ref = `file${type}`
+      // const dom = this.$refs[ref]
+      // dom && dom.click()
     },
     delFile (type, index) {
       const key = `file${type}`
