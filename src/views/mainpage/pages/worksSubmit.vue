@@ -83,8 +83,8 @@
     </div>
     <div class="work_submit">
       <span>作品提交</span>
-      <!-- <PublicButton @clickHandle="clickUploadBtn('2')">上传</PublicButton> -->
-      <PublicButton @clickHandle="dialogVisible = true">上传</PublicButton>
+      <PublicButton @clickHandle="clickUploadBtn('2')">上传</PublicButton>
+      <!-- <PublicButton @clickHandle="dialogVisible = true">上传</PublicButton> -->
       <input type="file" v-show="false" :multiple="true" ref="file2" @change="fileChange2">
     </div>
     <div class="work_list">
@@ -146,10 +146,10 @@ export default {
   methods: {
     ...mapActions(['POST_FILE_UPLOAD', 'GET_MY_TEAM_INFO', 'GET_DOWNLOAD_FILE']),
     clickUploadBtn (type) {
-      // console.log('上传类型', type)
-      // const ref = `file${type}`
-      // const dom = this.$refs[ref]
-      // dom && dom.click()
+      console.log('上传类型', type)
+      const ref = `file${type}`
+      const dom = this.$refs[ref]
+      dom && dom.click()
     },
     delFile (type, index) {
       const key = `file${type}`
@@ -210,7 +210,10 @@ export default {
           console.log('作品附件上传成功:', res.data)
         }
       } catch (e) {
-        console.log(e)
+        this.$message({
+          message: e.response.data.msg,
+          type: 'error'
+        })
       }
       const dom = this.$refs.file2
       dom.value = ''
